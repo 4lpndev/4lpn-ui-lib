@@ -85,7 +85,8 @@ class UiLibTheme {
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
-                "titleAlign": "center",  
+                "left": "-3px",
+                "top": "-20px",
                 "title": "",
                 "borderColor": "gray",
                 "borderType": "double",
@@ -148,7 +149,8 @@ class UiLib {
     constructor() {
         this._mainWindow = null;
         this._theme = new UiLibTheme();
-        this._tabsElem = null
+        this._tabs = null
+        this._currentTab = null
         this._events = events
         this._guiBind = 16
         this._guiHidden = false
@@ -157,8 +159,12 @@ class UiLib {
     create_window(title, dimentions) {
         const th = this._theme;
         const winTitle = document.createElement("h4");
+        winTitle.style.position = "relative"
         winTitle.style.color = th._theme.gui.textColor;
-        winTitle.style.textAlign = th._theme.gui.titleAlign;
+        winTitle.style.left = th._theme.gui.left;
+        winTitle.style.top = th._theme.gui.top;
+        winTitle.style.width = "fit-content"
+        winTitle.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`
         winTitle.style.fontFamily = th._theme.gui.font;
         winTitle.innerText = title;
 
