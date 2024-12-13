@@ -86,11 +86,31 @@ class UiLibTheme {
                 "font": "monospace",
                 "textColor": "white",
                 "titleAlign": "center",  
-                "title": "change me",
-                "borderColor": "black",
-                "borderType": "solid",
-                "borderThickness": 1,
-                "borderRadius": 0
+                "title": "",
+                "borderColor": "gray",
+                "borderType": "double",
+                "borderThickness": "3px",
+                "borderRadius": "0px"
+            },
+
+            "buttons": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "10px"
+            },
+
+            "input": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "10px"
             }
         };
     }
@@ -128,6 +148,7 @@ class UiLib {
     constructor() {
         this._mainWindow = null;
         this._theme = new UiLibTheme();
+        this._tabsElem = null
         this._events = events
         this._guiBind = 16
         this._guiHidden = false
@@ -144,9 +165,10 @@ class UiLib {
         this._mainWindow = document.createElement("div");
         this._mainWindow.style.zIndex = 999999;
         this._mainWindow.style.position = "absolute";
-        this._mainWindow.style.width = `${dimentions[0]}px`;
-        this._mainWindow.style.height = `${dimentions[1]}px`;
+        this._mainWindow.style.width = `${dimentions[0]}`;
+        this._mainWindow.style.height = `${dimentions[1]}`;
         this._mainWindow.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`;
+        this._mainWindow.style.borderRadius = th._theme.gui.borderRadius
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
 
         document.body.addEventListener("keydown", (e) => {
@@ -171,26 +193,35 @@ class UiLib {
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
     }
 
-    create_button(text, dimentions, position, action) {
+    create_colorpicker(position) {
+        const cpicker = document.createElement("input")
+        cpicker.type = "color"
+        cpicker.style.position = "relative"
+        cpicker.style.left = position[0]
+        cpicker.style.top = position[1]
+
+        this._mainWindow.appendChild(cpicker)
+
+        return cpicker
+    }
+
+    create_button(text, dimentions, position) {
         const th = this._theme;
         const btn = document.createElement("button");
-        btn.style.fontFamily = th._theme.gui.font;
-        btn.style.width = `${dimentions[0]}px`;
-        btn.style.height = `${dimentions[1]}px`;
+        btn.style.fontFamily = th._theme.buttons.font;
+        btn.style.width = `${dimentions[0]}`;
+        btn.style.height = `${dimentions[1]}`;
         btn.style.position = "relative";
-        btn.style.left = `${position[0]}px`;
-        btn.style.top = `${position[1]}px`;
-        btn.style.backgroundColor = th._theme.gui.backgroundColor;
-        btn.style.color = th._theme.gui.textColor;
-        btn.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`;
+        btn.style.left = `${position[0]}`;
+        btn.style.top = `${position[1]}`;
+        btn.style.backgroundColor = th._theme.buttons.backgroundColor;
+        btn.style.color = th._theme.buttons.textColor;
+        btn.style.border = `${th._theme.buttons.borderThickness} ${th._theme.buttons.borderType} ${th._theme.buttons.borderColor}`;
+        btn.style.borderRadius = th._theme.buttons.borderRadius
         btn.innerText = text;
 
         this._events.addEventListener("newBg", (data) => {
             btn.style.backgroundColor = data;
-        });
-
-        btn.addEventListener("click", () => {
-            action();
         });
 
         this._mainWindow.appendChild(btn);
@@ -198,7 +229,7 @@ class UiLib {
         return btn
     }
 
-    create_slider(text, min, max, position, action) {
+    create_slider(text, min, max, position) {
         const slider = document.createElement("input")
         slider.style.position = "relative"
         slider.type = "range"
@@ -206,25 +237,24 @@ class UiLib {
         slider.max = max
         slider.style.color = th.gui.textColor
         slider.style.fontFamily = th.gui.font
-        slider.style.left = `${position[0]}px`;
-        slider.style.top = `${position[1]}px`;
+        slider.style.left = `${position[0]}`;
+        slider.style.top = `${position[1]}`;
 
         const val = document.createElement("span")
         val.style.position = "relative"
         val.style.color = th.gui.textColor
         val.style.fontFamily = th.gui.font
         val.innerText = slider.value
-        val.style.left = `${position[0] - 120}px`;
-        val.style.top = `${position[1]}px`;
+        val.style.left = `${position[0] - 120}`;
+        val.style.top = `${position[1]}`;
         
         slider.addEventListener("change", () => {
             val.innerText = slider.value
-            action(slider.value)
         })
         this._mainWindow.appendChild(val)
         this._mainWindow.appendChild(slider)
 
-        return [val, slider]
+        return slider
     }
 
     create_label(text, position) {
@@ -233,29 +263,25 @@ class UiLib {
         lab.innerText = text
         lab.style.color = th.gui.textColor
         lab.style.fontFamily = th.gui.font
-        lab.style.left = `${position[0]}px`;
-        lab.style.top = `${position[1]}px`;
+        lab.style.left = `${position[0]}`;
+        lab.style.top = `${position[1]}`;
 
         this._mainWindow.appendChild(lab)
 
         return lab
     }
 
-    create_input(placeholder, dimentions, position, action) {
+    create_input(placeholder, dimentions, position) {
         const inp = document.createElement("input")
         inp.placeholder = placeholder
         inp.style.position = "relative"
-        inp.style.left = `${position[0]}px`
-        inp.style.top = `${position[1]}px`
-        inp.style.width = `${dimentions[0]}px`
-        inp.style.height = `${dimentions[1]}px`
-        inp.style.border = `${th.gui.borderThickness} ${th.gui.borderType} ${th.gui.borderColor}`;
+        inp.style.left = `${position[0]}`
+        inp.style.top = `${position[1]}`
+        inp.style.width = `${dimentions[0]}`
+        inp.style.height = `${dimentions[1]}`
+        inp.style.border = `${th.input.borderThickness} ${th.input.borderType} ${th.input.borderColor}`;
         inp.style.backgroundColor = th.gui.backgroundColor
         inp.style.color = th.gui.textColor
-
-        inp.addEventListener("change", () => {
-            action(inp.value);
-        })
         this._mainWindow.appendChild(inp)
 
         return inp
