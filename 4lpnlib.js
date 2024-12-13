@@ -275,10 +275,3 @@ class UiLibDebug {
         console.log("%c[4lpnUiLib]", `color: ${th["debug"]["infoColor"]}`, message)
     }
 }
-
-ui.create_window("this is a test", [300,600])
-ui.create_button("test", [50,20], [125,-1], testing)
-ui.create_label("everything works :D", [20,50])
-ui.create_slider("test slider", 0, 100, [40,100], slider_test)
-ui.create_input("test value here", [100,25], [-50,200], input_test)
-ui.append_window()
