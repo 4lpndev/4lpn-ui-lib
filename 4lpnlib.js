@@ -85,7 +85,7 @@ class UiLibTheme {
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
-                "left": "-3px",
+                "left": "-1px",
                 "top": "-20px",
                 "title": "",
                 "borderColor": "gray",
