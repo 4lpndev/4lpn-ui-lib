@@ -276,35 +276,6 @@ class UiLibDebug {
     }
 }
 
-
-//delete later, testing only
-let uiTheme = new UiLibTheme()
-const dbg = new UiLibDebug()
-const ui = new UiLib()
-
-let th = uiTheme.get_theme()
-
-dbg.info("this is an information")
-dbg.success("yay it works!! :D")
-dbg.error("nooooo it doesn't work :(")
-
-function testing() {
-    dbg.success("success!!")
-}
-
-function redrawWindow(color) {
-    uiTheme._theme.gui.backgroundColor = color;
-    events.dispatchEvent("newBg", color)
-}
-
-function slider_test(data) {
-    dbg.info("slider returned ",data)
-}
-
-function input_test(data) {
-    dbg.info("rahhh ",data)
-}
-
 ui.create_window("this is a test", [300,600])
 ui.create_button("test", [50,20], [125,-1], testing)
 ui.create_label("everything works :D", [20,50])
