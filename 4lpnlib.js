@@ -149,7 +149,7 @@ class UiLib {
         this._mainWindow.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`;
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
 
-        this._mainWindow.addEventListener("keypress", (e) => {
+        document.body.addEventListener("keydown", (e) => {
             if (e.code == this._guiBind) {
                 console.log("oe")
             }
