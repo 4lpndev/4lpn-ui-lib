@@ -151,7 +151,12 @@ class UiLib {
 
         document.body.addEventListener("keydown", (e) => {
             if (e.which == this._guiBind) {
-                console.log("oe")
+                this._guiHidden = !this._guiHidden
+                if (this._guiHidden) {
+                    this._mainWindow.style.display = "none"
+                } else {
+                    this._mainWindow.style.display = "block"
+                }
             }
         })
 
