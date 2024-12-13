@@ -8,7 +8,7 @@ function dragElement(elmnt) {
 
     function dragMouseDown(e) {
         e = e || window.event;
-        if (e.target.tagName === "INPUT") {
+        if (e.target.tagName === "INPUT" || e.target.className === "cb") {
             ;
         } else {
             e.preventDefault();
@@ -112,6 +112,17 @@ class UiLibTheme {
                 "borderType": "double",
                 "borderThickness": "2px",
                 "borderRadius": "10px"
+            },
+
+            "checkbox": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "5px",
+                "toggledColor": "white"
             }
         };
     }
@@ -226,10 +237,6 @@ class UiLib {
         btn.style.borderRadius = th._theme.buttons.borderRadius
         btn.innerText = text;
 
-        this._events.addEventListener("newBg", (data) => {
-            btn.style.backgroundColor = data;
-        });
-
         this._mainWindow.appendChild(btn);
 
         return btn
@@ -291,6 +298,42 @@ class UiLib {
         this._mainWindow.appendChild(inp)
 
         return inp
+    }
+
+    create_checkbox(text, position, boxdim) {
+        const checkbox = document.createElement("div")
+        const label = document.createElement("span")
+        checkbox.style.width = boxdim
+        checkbox.style.height = boxdim
+        checkbox.style.position = "relative"
+        checkbox.style.border = `${th.checkbox.borderThickness} ${th.checkbox.borderType} ${th.checkbox.borderColor}`;
+
+        checkbox.style.left = position[0]
+        checkbox.style.top = position[1]
+
+        checkbox.classList.add("cb")
+
+        label.style.fontFamily = th.gui.font
+        label.style.position = "relative"
+        label.style.left = `calc(${position[0]} + 30px)`
+        label.style.top = `calc(${position[1]} - 20px)`
+        label.style.color = th.gui.textColor
+        label.innerText = text
+
+        let toggled = false
+
+        ev.addEventListener("checked", (data) => {
+            if (data === true) { 
+                checkbox.style.backgroundColor = th.checkbox.toggledColor
+            } else {
+                checkbox.style.backgroundColor = th.gui.backgroundColor
+            }
+        })
+
+        this._mainWindow.appendChild(checkbox)
+        this._mainWindow.appendChild(label)
+
+        return checkbox
     }
 
     append_window() {
