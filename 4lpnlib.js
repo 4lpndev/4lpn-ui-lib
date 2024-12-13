@@ -129,6 +129,8 @@ class UiLib {
         this._mainWindow = null;
         this._theme = new UiLibTheme();
         this._events = events
+        this._guiBind = 16
+        this._guiHidden = false
     }
 
     create_window(title, dimentions) {
@@ -146,6 +148,12 @@ class UiLib {
         this._mainWindow.style.height = `${dimentions[1]}px`;
         this._mainWindow.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`;
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
+
+        this._mainWindow.addEventListener("keypress", (e) => {
+            if (e.code == "16") {
+                console.log("oe")
+            }
+        })
 
         this._events.addEventListener('newBg', (data) => {
             this._mainWindow.style.backgroundColor = data;
