@@ -129,7 +129,7 @@ class UiLib {
         this._mainWindow = null;
         this._theme = new UiLibTheme();
         this._events = events
-        this._guiBind = "ShiftRight"
+        this._guiBind = 16
         this._guiHidden = false
     }
 
@@ -150,7 +150,7 @@ class UiLib {
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
 
         document.body.addEventListener("keydown", (e) => {
-            if (e.code == this._guiBind) {
+            if (e.which == this._guiBind) {
                 console.log("oe")
             }
         })
