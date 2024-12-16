@@ -321,18 +321,18 @@ class UiLib {
         checkbox.style.width = boxdim
         checkbox.style.height = boxdim
         checkbox.style.position = "relative"
-        checkbox.style.border = `${th.gui.borderThickness} ${th.checkbox.borderType} ${th.checkbox.borderColor}`;
+        checkbox.style.border = `${this._theme.gui.borderThickness} ${this._theme.checkbox.borderType} ${this._theme.checkbox.borderColor}`;
 
         checkbox.style.left = position[0]
         checkbox.style.top = position[1]
 
         checkbox.classList.add("cb")
 
-        label.style.fontFamily = th.gui.font
+        label.style.fontFamily = this._theme.gui.font
         label.style.position = "relative"
         label.style.left = `calc(${position[0]} + 30px)`
         label.style.top = `calc(${position[1]} - 20px)`
-        label.style.color = th.gui.textColor
+        label.style.color = this._theme.gui.textColor
         label.innerText = text
 
         let toggled = false
