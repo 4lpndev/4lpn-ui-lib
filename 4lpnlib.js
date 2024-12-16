@@ -191,7 +191,6 @@ class UiLib {
     }
 
     unload_tab(tabObj) {
-        console.log(this._elements)
         this._elements.forEach(elem => {
             elem.remove()
         })
