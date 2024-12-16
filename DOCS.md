@@ -123,3 +123,87 @@ tab5.addEventListener("click", () => {
     const label = ui.create_label("this is tab 5", ["20px","50px"])
 })
 ```
+
+# how to use in tampermonkey:
+
+here's an example tampermonkey script (tried on firefox):
+
+```js
+// ==UserScript==
+// @name         test lib
+// @namespace    http://tampermonkey.net/
+// @version      2024-12-16
+// @description  i'm on dat gud kush and alkahal 🔥🗣
+// @author       You
+// @match        http://*/*
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @grant        none
+// @require      https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/main/4lpnlib.js
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    
+    let uiTheme = new UiLibTheme()
+    const dbg = new UiLibDebug()
+    const ui = new UiLib()
+
+    let toggled = false
+
+    let th = uiTheme.get_theme()
+
+    dbg.info("this is an information")
+    dbg.success("yay it works!! :D")
+    dbg.error("nooooo it doesn't work :(")
+
+    function testing() {
+        dbg.success("success!!")
+    }
+
+    function slider_test(data) {
+        dbg.info(data)
+    }
+
+    function input_test(data) {
+        dbg.info(data)
+    }
+
+    ui.create_window("4lpn's UI lib demo", ["280px","430px"])
+
+    ui.create_tab_ctx()
+    const tab1 = ui.create_tab("combat")
+    const tab2 = ui.create_tab("movement")
+    const tab3 = ui.create_tab("visuals")
+    const tab4 = ui.create_tab("misc")
+    const tab5 = ui.create_tab("exploits")
+    ui.append_tab_ctx()
+
+    ui.append_window()
+
+    tab1.addEventListener("click", () => {
+        ui.unload_tab()
+        const label = ui.create_label("this is tab 1", ["20px","50px"])
+        })
+
+    tab2.addEventListener("click", () => {
+        ui.unload_tab()
+        const label = ui.create_label("this is tab 2", ["20px","50px"])
+        })
+
+    tab3.addEventListener("click", () => {
+        ui.unload_tab()
+        const label = ui.create_label("this is tab 3", ["20px","50px"])
+        })
+
+    tab4.addEventListener("click", () => {
+        ui.unload_tab()
+        const label = ui.create_label("this is tab 4", ["20px","50px"])
+        })
+
+    tab5.addEventListener("click", () => {
+        ui.unload_tab()
+        const label = ui.create_label("this is tab 5", ["20px","50px"])
+        })
+})();
+```
+
