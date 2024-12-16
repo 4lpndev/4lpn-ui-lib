@@ -1,9 +1,6 @@
-//delete later, testing only
 let uiTheme = new UiLibTheme()
 const dbg = new UiLibDebug()
 const ui = new UiLib()
-
-let prev_tab
 
 let toggled = false
 
@@ -38,31 +35,26 @@ ui.append_tab_ctx()
 ui.append_window()
 
 tab1.addEventListener("click", () => {
-    ui.unload_tab(tab1)
+    ui.unload_tab()
     const label = ui.create_label("this is tab 1", ["20px","50px"])
-    prev_tab = tab1
 })
 
 tab2.addEventListener("click", () => {
-    ui.unload_tab(prev_tab)
+    ui.unload_tab()
     const label = ui.create_label("this is tab 2", ["20px","50px"])
-    prev_tab = tab2
 })
 
 tab3.addEventListener("click", () => {
-    ui.unload_tab(prev_tab)
+    ui.unload_tab()
     const label = ui.create_label("this is tab 3", ["20px","50px"])
-    prev_tab = tab3
 })
 
 tab4.addEventListener("click", () => {
-    ui.unload_tab(prev_tab)
+    ui.unload_tab()
     const label = ui.create_label("this is tab 4", ["20px","50px"])
-    prev_tab = tab4
 })
 
 tab5.addEventListener("click", () => {
-    ui.unload_tab(prev_tab)
+    ui.unload_tab()
     const label = ui.create_label("this is tab 5", ["20px","50px"])
-    prev_tab = tab5
 })
