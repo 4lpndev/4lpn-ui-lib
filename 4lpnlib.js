@@ -151,7 +151,7 @@ class UiLib {
         this._elements = []
         this._currentTab = null
         this._events = events
-        this._guiBind = 16
+        this._guiBind = "ShiftRight"
         this._guiHidden = false
     }
 
@@ -218,7 +218,7 @@ class UiLib {
 
 
         document.body.addEventListener("keydown", (e) => {
-            if (e.which == this._guiBind) {
+            if (e.code == this._guiBind) {
                 this._guiHidden = !this._guiHidden
                 if (this._guiHidden) {
                     this._mainWindow.style.display = "none"
