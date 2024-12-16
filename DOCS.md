@@ -34,7 +34,7 @@ functions:
 - `create_tab_ctx()`: creates the bar separating the tabs from the rest
 - `append_tab_ctx()`: adds the `create_tab_ctx` to the main UI
 - `create_tab(tabname)`: creates and returns a tab with the given name
-- `unload_tab)`: unloads everything from previous tab
+- `unload_tab()`: unloads everything from previous tab
 - `create_window(title, dimentions)`: creates the main window
 - `create_colorpicker(position)`: creates and returns a color picker in the window
 - `create_button(text, dimentions, position)`: creates and returns a button with the given dimentions and position
