@@ -122,6 +122,12 @@ class UiLibTheme {
                 "borderType": "double",
                 "borderThickness": "2px",
                 "borderRadius": "10px"
+            },
+
+            "checkbox": {
+                "borderType": "solid",
+                "borderThickness": "2px",
+                "borderColor": "white"
             }
         };
     }
