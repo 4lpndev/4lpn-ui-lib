@@ -135,7 +135,7 @@ here's an example tampermonkey script (tried on firefox):
 // @version      2024-12-16
 // @description  i'm on dat gud kush and alkahal 🔥🗣
 // @author       You
-// @match        http://*/*
+// @match        https://REPLACE-ME-WITH-A-WEBSITE!!/
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // @require      https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/main/4lpnlib.js
@@ -143,7 +143,7 @@ here's an example tampermonkey script (tried on firefox):
 
 (function() {
     'use strict';
-    
+
     let uiTheme = new UiLibTheme()
     const dbg = new UiLibDebug()
     const ui = new UiLib()
