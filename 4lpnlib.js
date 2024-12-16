@@ -277,15 +277,15 @@ class UiLib {
         slider.type = "range"
         slider.min = min
         slider.max = max
-        slider.style.color = th.gui.textColor
-        slider.style.fontFamily = th.gui.font
+        slider.style.color = this._theme.gui.textColor
+        slider.style.fontFamily = this._theme.gui.font
         slider.style.left = `${position[0]}`;
         slider.style.top = `${position[1]}`;
 
         const val = document.createElement("span")
         val.style.position = "relative"
-        val.style.color = th.gui.textColor
-        val.style.fontFamily = th.gui.font
+        val.style.color = this._theme.gui.textColor
+        val.style.fontFamily = this._theme.gui.font
         val.innerText = slider.value
         val.style.left = `${position[0] - 120}`;
         val.style.top = `${position[1]}`;
@@ -306,8 +306,8 @@ class UiLib {
         const lab = document.createElement("span")
         lab.style.position = "relative"
         lab.innerText = text
-        lab.style.color = th.gui.textColor
-        lab.style.fontFamily = th.gui.font
+        lab.style.color = this._theme.gui.textColor
+        lab.style.fontFamily = this._theme.gui.font
         lab.style.left = `${position[0]}`;
         lab.style.top = `${position[1]}`;
 
@@ -326,9 +326,9 @@ class UiLib {
         inp.style.top = `${position[1]}`
         inp.style.width = `${dimentions[0]}`
         inp.style.height = `${dimentions[1]}`
-        inp.style.border = `${th.input.borderThickness} ${th.input.borderType} ${th.input.borderColor}`;
-        inp.style.backgroundColor = th.gui.backgroundColor
-        inp.style.color = th.gui.textColor
+        inp.style.border = `${this._theme.input.borderThickness} ${this._theme.input.borderType} ${this._theme.input.borderColor}`;
+        inp.style.backgroundColor = this._theme.gui.backgroundColor
+        inp.style.color = this._theme.gui.textColor
         this._mainWindow.appendChild(inp)
 
         this._elements.push(inp)
@@ -371,9 +371,9 @@ class UiLib {
         const sel = document.createElement("select")
         sel.style.position = "relative"
         sel.style.backgroundColor = this._theme.dropdown.backgroundColor
-        sel.style.border = `${th.dropdown.borderThickness} ${th.dropdown.borderType} ${th.dropdown.borderColor}`;
-        sel.style.color = th.dropdown.textColor
-        sel.style.borderRadius = th.dropdown.borderRadius
+        sel.style.border = `${this._theme.dropdown.borderThickness} ${this._theme.dropdown.borderType} ${this._theme.dropdown.borderColor}`;
+        sel.style.color = this._theme.dropdown.textColor
+        sel.style.borderRadius = this._theme.dropdown.borderRadius
         sel.style.left = position[0]
         sel.style.top = position[1]
         sel.style.width = dimentions[0]
