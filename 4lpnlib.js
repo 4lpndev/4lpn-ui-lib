@@ -8,7 +8,7 @@ function dragElement(elmnt) {
 
     function dragMouseDown(e) {
         e = e || window.event;
-        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.className === "cb") {
             ;
         } else {
             e.preventDefault();
@@ -125,9 +125,14 @@ class UiLibTheme {
             },
 
             "checkbox": {
-                "borderType": "solid",
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
                 "borderThickness": "2px",
-                "borderColor": "white"
+                "borderRadius": "5px",
+                "toggledColor": "white"
             }
         };
     }
@@ -321,23 +326,23 @@ class UiLib {
         checkbox.style.width = boxdim
         checkbox.style.height = boxdim
         checkbox.style.position = "relative"
-        checkbox.style.border = `${this._theme.gui.borderThickness} ${this._theme.checkbox.borderType} ${this._theme.checkbox.borderColor}`;
+        checkbox.style.border = `${this._theme._theme.gui.borderThickness} ${this._theme._theme.checkbox.borderType} ${this._theme._theme.checkbox.borderColor}`;
 
         checkbox.style.left = position[0]
         checkbox.style.top = position[1]
 
         checkbox.classList.add("cb")
 
-        label.style.fontFamily = this._theme.gui.font
+        label.style.fontFamily = this._theme._theme.gui.font
         label.style.position = "relative"
         label.style.left = `calc(${position[0]} + 30px)`
         label.style.top = `calc(${position[1]} - 20px)`
-        label.style.color = this._theme.gui.textColor
+        label.style.color = this._theme._theme.gui.textColor
         label.innerText = text
 
         let toggled = false
 
-        ev.addEventListener("checked", (data) => {
+        this._events.addEventListener("checked", (data) => {
             if (data === true) { 
                 checkbox.style.backgroundColor = th.checkbox.toggledColor
             } else {
