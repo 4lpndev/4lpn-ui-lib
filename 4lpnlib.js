@@ -140,30 +140,6 @@ class UiLibTheme {
     get_theme() {
         return this._theme;
     }
-
-    set title(string) {
-        this._theme.gui.title = string;
-    }
-
-    set infoColor(newcol) {
-        this._theme.debug.infoColor = newcol;
-    }
-
-    set errorColor(newcol) {
-        this._theme.debug.errorColor = newcol;
-    }
-
-    set successColor(newcol) {
-        this._theme.debug.successColor = newcol;
-    }
-
-    set mainTheme(newcol) {
-        this._mainColor = newcol;
-    }
-
-    set backgroundColor(newcol) {
-        this._theme.gui.backgroundColor = newcol;
-    }
 }
 
 class UiLib {
@@ -172,6 +148,7 @@ class UiLib {
         this._theme = new UiLibTheme().get_theme();
         this._tabs = []
         this._tabctx = null
+        this._elements = []
         this._currentTab = null
         this._events = events
         this._guiBind = 16
@@ -195,7 +172,6 @@ class UiLib {
     }
 
     create_tab(tabname) {
-
         const tab = document.createElement("div")
         tab.innerText = tabname
         tab.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
@@ -209,11 +185,16 @@ class UiLib {
 
         this._tabctx.appendChild(tab)
 
+        this._tabs.push(tab)
+
         return tab
     }
 
     unload_tab(tabObj) {
-        alert("not working")
+        console.log(this._elements)
+        this._elements.forEach(elem => {
+            elem.remove()
+        })
     }
 
     create_window(title, dimentions) {
@@ -269,6 +250,8 @@ class UiLib {
 
         this._mainWindow.appendChild(cpicker)
 
+        this._elements.push(cpicker)
+
         return cpicker
     }
 
@@ -289,6 +272,8 @@ class UiLib {
         this._events.addEventListener("newBg", (data) => {
             btn.style.backgroundColor = data;
         });
+
+        this._elements.push(btn)
 
         this._mainWindow.appendChild(btn);
 
@@ -317,6 +302,9 @@ class UiLib {
         slider.addEventListener("change", () => {
             val.innerText = slider.value
         })
+
+        this._elements.push(slider)
+        this._elements.push(val)
         this._mainWindow.appendChild(val)
         this._mainWindow.appendChild(slider)
 
@@ -331,6 +319,8 @@ class UiLib {
         lab.style.fontFamily = th.gui.font
         lab.style.left = `${position[0]}`;
         lab.style.top = `${position[1]}`;
+
+        this._elements.push(lab)
 
         this._mainWindow.appendChild(lab)
 
@@ -349,6 +339,8 @@ class UiLib {
         inp.style.backgroundColor = th.gui.backgroundColor
         inp.style.color = th.gui.textColor
         this._mainWindow.appendChild(inp)
+
+        this._elements.push(inp)
 
         this._events.addEventListener("newBg", (data) => {
             inp.style.backgroundColor = data;
@@ -386,6 +378,8 @@ class UiLib {
                 checkbox.style.backgroundColor = th.gui.backgroundColor
             }
         })
+        this._elements.push(checkbox)
+        this._elements.push(label)
 
         this._mainWindow.appendChild(checkbox)
         this._mainWindow.appendChild(label)
@@ -415,6 +409,7 @@ class UiLib {
             sel.style.backgroundColor = data;
         });
 
+        this._elements.push(sel)
 
         this._mainWindow.appendChild(sel)
 
