@@ -408,14 +408,14 @@ class UiLib {
 
 class UiLibDebug {
     error(message) {
-        console.log("%c[4lpnUiLib]", `color: ${th["debug"]["errorColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["errorColor"]}`, message)
     }
 
     success(message) {
-        console.log("%c[4lpnUiLib]", `color: ${th["debug"]["successColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["successColor"]}`, message)
     }
 
     info(message) {
-        console.log("%c[4lpnUiLib]", `color: ${th["debug"]["infoColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["infoColor"]}`, message)
     }
 }
