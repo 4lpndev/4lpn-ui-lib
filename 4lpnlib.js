@@ -229,10 +229,6 @@ class UiLib {
             }
         })
 
-        this._events.addEventListener('newBg', (data) => {
-            this._mainWindow.style.backgroundColor = data;
-        });
-
         this._mainWindow.appendChild(winTitle);
     }
 
@@ -268,10 +264,6 @@ class UiLib {
         btn.style.border = `${this._theme.buttons.borderThickness} ${this._theme.buttons.borderType} ${this._theme.buttons.borderColor}`;
         btn.style.borderRadius = this._theme.buttons.borderRadius
         btn.innerText = text;
-
-        this._events.addEventListener("newBg", (data) => {
-            btn.style.backgroundColor = data;
-        });
 
         this._elements.push(btn)
 
@@ -342,10 +334,6 @@ class UiLib {
 
         this._elements.push(inp)
 
-        this._events.addEventListener("newBg", (data) => {
-            inp.style.backgroundColor = data;
-        });
-
         return inp
     }
 
@@ -371,13 +359,6 @@ class UiLib {
 
         let toggled = false
 
-        this._events.addEventListener("checked", (data) => {
-            if (data === true) { 
-                checkbox.style.backgroundColor = th.checkbox.toggledColor
-            } else {
-                checkbox.style.backgroundColor = th.gui.backgroundColor
-            }
-        })
         this._elements.push(checkbox)
         this._elements.push(label)
 
@@ -404,10 +385,6 @@ class UiLib {
             opt.innerText = opts
             sel.appendChild(opt)
         })
-
-        this._events.addEventListener("newBg", (data) => {
-            sel.style.backgroundColor = data;
-        });
 
         this._elements.push(sel)
 
