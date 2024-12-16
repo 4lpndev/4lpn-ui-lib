@@ -169,24 +169,62 @@ class UiLibTheme {
 class UiLib {
     constructor() {
         this._mainWindow = null;
-        this._theme = new UiLibTheme();
-        this._tabs = null
+        this._theme = new UiLibTheme().get_theme();
+        this._tabs = []
+        this._tabctx = null
         this._currentTab = null
         this._events = events
         this._guiBind = 16
         this._guiHidden = false
     }
 
+    create_tab_ctx() {
+    const tabappend = document.createElement("div")
+        tabappend.style.width = "auto"
+        this._tabctx = tabappend
+    }
+
+    append_tab_ctx() {
+        const tab_ctx = document.createElement("div")
+        tab_ctx.style.width = "auto"
+
+        tab_ctx.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
+
+        this._tabctx.appendChild(tab_ctx)
+        this._mainWindow.appendChild(this._tabctx)
+    }
+
+    create_tab(tabname) {
+
+        const tab = document.createElement("div")
+        tab.innerText = tabname
+        tab.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
+        tab.style.backgroundColor = this._theme.gui.backgroundColor
+        tab.style.position = "relative"
+        tab.style.display = "inline-block"
+        tab.style.color = this._theme.gui.textColor
+        tab.style.fontFamily = this._theme.gui.font
+        tab.style.width = "fit-content"
+        tab.style.height = "fit-content"
+
+        this._tabctx.appendChild(tab)
+
+        return tab
+    }
+
+    unload_tab(tabObj) {
+        alert("not working")
+    }
+
     create_window(title, dimentions) {
-        const th = this._theme;
         const winTitle = document.createElement("h4");
         winTitle.style.position = "relative"
-        winTitle.style.color = th._theme.gui.textColor;
-        winTitle.style.left = th._theme.gui.left;
-        winTitle.style.top = th._theme.gui.top;
+        winTitle.style.color = this._theme.gui.textColor;
+        winTitle.style.left = this._theme.gui.left;
+        winTitle.style.top = this._theme.gui.top;
         winTitle.style.width = "fit-content"
-        winTitle.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`
-        winTitle.style.fontFamily = th._theme.gui.font;
+        winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
+        winTitle.style.fontFamily = this._theme.gui.font;
         winTitle.innerText = title;
 
         this._mainWindow = document.createElement("div");
@@ -194,9 +232,9 @@ class UiLib {
         this._mainWindow.style.position = "absolute";
         this._mainWindow.style.width = `${dimentions[0]}`;
         this._mainWindow.style.height = `${dimentions[1]}`;
-        this._mainWindow.style.border = `${th._theme.gui.borderThickness} ${th._theme.gui.borderType} ${th._theme.gui.borderColor}`;
-        this._mainWindow.style.borderRadius = th._theme.gui.borderRadius
-        this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
+        this._mainWindow.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`;
+        this._mainWindow.style.borderRadius = this._theme.gui.borderRadius
+        this._mainWindow.style.backgroundColor = this._theme.gui.backgroundColor;
 
 
         document.body.addEventListener("keydown", (e) => {
@@ -235,18 +273,17 @@ class UiLib {
     }
 
     create_button(text, dimentions, position) {
-        const th = this._theme;
         const btn = document.createElement("button");
-        btn.style.fontFamily = th._theme.buttons.font;
+        btn.style.fontFamily = this._theme.buttons.font;
         btn.style.width = `${dimentions[0]}`;
         btn.style.height = `${dimentions[1]}`;
         btn.style.position = "relative";
         btn.style.left = `${position[0]}`;
         btn.style.top = `${position[1]}`;
-        btn.style.backgroundColor = th._theme.buttons.backgroundColor;
-        btn.style.color = th._theme.buttons.textColor;
-        btn.style.border = `${th._theme.buttons.borderThickness} ${th._theme.buttons.borderType} ${th._theme.buttons.borderColor}`;
-        btn.style.borderRadius = th._theme.buttons.borderRadius
+        btn.style.backgroundColor = this._theme.buttons.backgroundColor;
+        btn.style.color = this._theme.buttons.textColor;
+        btn.style.border = `${this._theme.buttons.borderThickness} ${this._theme.buttons.borderType} ${this._theme.buttons.borderColor}`;
+        btn.style.borderRadius = this._theme.buttons.borderRadius
         btn.innerText = text;
 
         this._events.addEventListener("newBg", (data) => {
@@ -326,18 +363,18 @@ class UiLib {
         checkbox.style.width = boxdim
         checkbox.style.height = boxdim
         checkbox.style.position = "relative"
-        checkbox.style.border = `${this._theme._theme.gui.borderThickness} ${this._theme._theme.checkbox.borderType} ${this._theme._theme.checkbox.borderColor}`;
+        checkbox.style.border = `${this._theme.gui.borderThickness} ${this._theme.checkbox.borderType} ${this._theme.checkbox.borderColor}`;
 
         checkbox.style.left = position[0]
         checkbox.style.top = position[1]
 
         checkbox.classList.add("cb")
 
-        label.style.fontFamily = this._theme._theme.gui.font
+        label.style.fontFamily = this._theme.gui.font
         label.style.position = "relative"
         label.style.left = `calc(${position[0]} + 30px)`
         label.style.top = `calc(${position[1]} - 20px)`
-        label.style.color = this._theme._theme.gui.textColor
+        label.style.color = this._theme.gui.textColor
         label.innerText = text
 
         let toggled = false
@@ -359,7 +396,7 @@ class UiLib {
     create_dropdown(label, options, dimentions, position) {
         const sel = document.createElement("select")
         sel.style.position = "relative"
-        sel.style.backgroundColor = th.dropdown.backgroundColor
+        sel.style.backgroundColor = this._theme.dropdown.backgroundColor
         sel.style.border = `${th.dropdown.borderThickness} ${th.dropdown.borderType} ${th.dropdown.borderColor}`;
         sel.style.color = th.dropdown.textColor
         sel.style.borderRadius = th.dropdown.borderRadius
