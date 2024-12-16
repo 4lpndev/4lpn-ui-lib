@@ -315,7 +315,7 @@ class UiLib {
         checkbox.style.width = boxdim
         checkbox.style.height = boxdim
         checkbox.style.position = "relative"
-        checkbox.style.border = `${th.checkbox.borderThickness} ${th.checkbox.borderType} ${th.checkbox.borderColor}`;
+        checkbox.style.border = `${th.gui.borderThickness} ${th.checkbox.borderType} ${th.checkbox.borderColor}`;
 
         checkbox.style.left = position[0]
         checkbox.style.top = position[1]
