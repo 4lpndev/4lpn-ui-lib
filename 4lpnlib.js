@@ -8,7 +8,7 @@ function dragElement(elmnt) {
 
     function dragMouseDown(e) {
         e = e || window.event;
-        if (e.target.tagName === "INPUT" || e.target.className === "cb") {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
             ;
         } else {
             e.preventDefault();
@@ -85,7 +85,7 @@ class UiLibTheme {
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
-                "left": "-1px",
+                "left": "-3px",
                 "top": "-20px",
                 "title": "",
                 "borderColor": "gray",
@@ -114,15 +114,14 @@ class UiLibTheme {
                 "borderRadius": "10px"
             },
 
-            "checkbox": {
+            "dropdown": {
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
                 "borderColor": "white",
                 "borderType": "double",
                 "borderThickness": "2px",
-                "borderRadius": "5px",
-                "toggledColor": "white"
+                "borderRadius": "10px"
             }
         };
     }
@@ -188,6 +187,7 @@ class UiLib {
         this._mainWindow.style.borderRadius = th._theme.gui.borderRadius
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
 
+
         document.body.addEventListener("keydown", (e) => {
             if (e.which == this._guiBind) {
                 this._guiHidden = !this._guiHidden
@@ -202,6 +202,7 @@ class UiLib {
         this._events.addEventListener('newBg', (data) => {
             this._mainWindow.style.backgroundColor = data;
         });
+
         this._mainWindow.appendChild(winTitle);
     }
 
@@ -236,6 +237,10 @@ class UiLib {
         btn.style.border = `${th._theme.buttons.borderThickness} ${th._theme.buttons.borderType} ${th._theme.buttons.borderColor}`;
         btn.style.borderRadius = th._theme.buttons.borderRadius
         btn.innerText = text;
+
+        this._events.addEventListener("newBg", (data) => {
+            btn.style.backgroundColor = data;
+        });
 
         this._mainWindow.appendChild(btn);
 
@@ -297,6 +302,10 @@ class UiLib {
         inp.style.color = th.gui.textColor
         this._mainWindow.appendChild(inp)
 
+        this._events.addEventListener("newBg", (data) => {
+            inp.style.backgroundColor = data;
+        });
+
         return inp
     }
 
@@ -334,6 +343,34 @@ class UiLib {
         this._mainWindow.appendChild(label)
 
         return checkbox
+    }
+
+    create_dropdown(label, options, dimentions, position) {
+        const sel = document.createElement("select")
+        sel.style.position = "relative"
+        sel.style.backgroundColor = th.dropdown.backgroundColor
+        sel.style.border = `${th.dropdown.borderThickness} ${th.dropdown.borderType} ${th.dropdown.borderColor}`;
+        sel.style.color = th.dropdown.textColor
+        sel.style.borderRadius = th.dropdown.borderRadius
+        sel.style.left = position[0]
+        sel.style.top = position[1]
+        sel.style.width = dimentions[0]
+        sel.style.height = dimentions[1]
+        options.forEach(opts => {
+            const opt = document.createElement("option")
+            opt.value = opts
+            opt.innerText = opts
+            sel.appendChild(opt)
+        })
+
+        this._events.addEventListener("newBg", (data) => {
+            sel.style.backgroundColor = data;
+        });
+
+
+        this._mainWindow.appendChild(sel)
+
+        return sel
     }
 
     append_window() {
