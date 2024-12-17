@@ -145,7 +145,7 @@ class UiLibTheme {
 class UiLib {
     constructor() {
         this._mainWindow = null;
-        this._theme = new UiLibTheme().get_theme();
+        this._theme = null;
         this._tabs = []
         this._tabctx = null
         this._elements = []
