@@ -62,44 +62,41 @@ functions:
 here's a little example i made to try the tabs out:
 
 ```js
+//classes initialization
 let uiTheme = new UiLibTheme()
 const dbg = new UiLibDebug()
 const ui = new UiLib()
+/*
+theme stuff
+IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.get_theme()" line
+example: uiTheme._theme.gui.backgroundColor = "purple"
+refere to the theme structure in docs
+*/
+ui._theme = uiTheme.get_theme()
+let th = ui._theme
 
-let toggled = false
-
-let th = uiTheme.get_theme()
-
+//for debugging
 dbg.info("this is an information")
 dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
-function testing() {
-    dbg.success("success!!")
-}
-
-function slider_test(data) {
-    dbg.info(data)
-}
-
-function input_test(data) {
-    dbg.info(data)
-}
-
+//creating the window
 ui.create_window("4lpn's UI lib demo", ["280px","430px"])
 
-ui.create_tab_ctx()
-const tab1 = ui.create_tab("combat")
-const tab2 = ui.create_tab("movement")
-const tab3 = ui.create_tab("visuals")
-const tab4 = ui.create_tab("misc")
-const tab5 = ui.create_tab("exploits")
-ui.append_tab_ctx()
+//for the tabs
+ui.create_tab_ctx() //tab context
+const tab1 = ui.create_tab("combat")   // -
+const tab2 = ui.create_tab("movement") //  |
+const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
+const tab4 = ui.create_tab("misc")     //  |
+const tab5 = ui.create_tab("exploits") // -
+ui.append_tab_ctx() //append tabs to window
 
-ui.append_window()
+ui.append_window() //render window to main screen
 
+//events and stuff
 tab1.addEventListener("click", () => {
-    ui.unload_tab()
+    ui.unload_tab() //add this before any actions
     const label = ui.create_label("this is tab 1", ["20px","50px"])
 })
 
@@ -144,66 +141,63 @@ here's an example tampermonkey script (tried on firefox):
 (function() {
     'use strict';
 
+    //classes initialization
     let uiTheme = new UiLibTheme()
     const dbg = new UiLibDebug()
     const ui = new UiLib()
+    /*
+    theme stuff
+    IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.get_theme()" line
+    example: uiTheme._theme.gui.backgroundColor = "purple"
+    refere to the theme structure in docs
+    */
+    ui._theme = uiTheme.get_theme()
+    let th = ui._theme
 
-    let toggled = false
-
-    let th = uiTheme.get_theme()
-
+    //for debugging
     dbg.info("this is an information")
     dbg.success("yay it works!! :D")
     dbg.error("nooooo it doesn't work :(")
 
-    function testing() {
-        dbg.success("success!!")
-    }
-
-    function slider_test(data) {
-        dbg.info(data)
-    }
-
-    function input_test(data) {
-        dbg.info(data)
-    }
-
+    //creating the window
     ui.create_window("4lpn's UI lib demo", ["280px","430px"])
 
-    ui.create_tab_ctx()
-    const tab1 = ui.create_tab("combat")
-    const tab2 = ui.create_tab("movement")
-    const tab3 = ui.create_tab("visuals")
-    const tab4 = ui.create_tab("misc")
-    const tab5 = ui.create_tab("exploits")
-    ui.append_tab_ctx()
+    //for the tabs
+    ui.create_tab_ctx() //tab context
+    const tab1 = ui.create_tab("combat")   // -
+    const tab2 = ui.create_tab("movement") //  |
+    const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
+    const tab4 = ui.create_tab("misc")     //  |
+    const tab5 = ui.create_tab("exploits") // -
+    ui.append_tab_ctx() //append tabs to window
 
-    ui.append_window()
+    ui.append_window() //render window to main screen
 
+    //events and stuff
     tab1.addEventListener("click", () => {
-        ui.unload_tab()
+        ui.unload_tab() //add this before any actions
         const label = ui.create_label("this is tab 1", ["20px","50px"])
-        })
+    })
 
     tab2.addEventListener("click", () => {
         ui.unload_tab()
         const label = ui.create_label("this is tab 2", ["20px","50px"])
-        })
+    })
 
     tab3.addEventListener("click", () => {
         ui.unload_tab()
         const label = ui.create_label("this is tab 3", ["20px","50px"])
-        })
+    })
 
     tab4.addEventListener("click", () => {
         ui.unload_tab()
         const label = ui.create_label("this is tab 4", ["20px","50px"])
-        })
+    })
 
     tab5.addEventListener("click", () => {
         ui.unload_tab()
         const label = ui.create_label("this is tab 5", ["20px","50px"])
-        })
+    })
 })();
 ```
 
