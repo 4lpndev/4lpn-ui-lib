@@ -71,17 +71,15 @@ const events = new UiLibEvents();
 
 class UiLibTheme {
     constructor() {
-        this._mainColor = "#4C4CE4";
 
         this._theme = {
             "debug": {
                 "errorColor": "red",
                 "successColor": "green",
-                "infoColor": this._mainColor
+                "infoColor": "#4C4CE4"
             },
 
             "gui": {
-                "globalColor": this._mainColor,
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
@@ -145,7 +143,7 @@ class UiLibTheme {
 class UiLib {
     constructor() {
         this._mainWindow = null;
-        this._theme = null;
+        this._theme = new UiLibTheme().get_theme();
         this._tabs = []
         this._tabctx = null
         this._elements = []
@@ -408,14 +406,14 @@ class UiLib {
 
 class UiLibDebug {
     error(message) {
-        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["errorColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["errorColor"]}`, message)
     }
 
     success(message) {
-        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["successColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["successColor"]}`, message)
     }
 
     info(message) {
-        console.log("%c[4lpnUiLib]", `color: ${new UiLibTheme().get_theme()["debug"]["infoColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["infoColor"]}`, message)
     }
 }
