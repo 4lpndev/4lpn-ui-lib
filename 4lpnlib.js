@@ -200,6 +200,7 @@ class UiLib {
         winTitle.style.color = this._theme.gui.textColor;
         winTitle.style.left = this._theme.gui.left;
         winTitle.style.top = this._theme.gui.top;
+        winTitle.style.borderTopLeftRadius = this._theme.gui.borderRadius
         winTitle.style.width = "fit-content"
         winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
         winTitle.style.fontFamily = this._theme.gui.font;
