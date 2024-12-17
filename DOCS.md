@@ -201,3 +201,70 @@ here's an example tampermonkey script (tried on firefox):
 })();
 ```
 
+if you wish to change anything to the ui (ex. bg color, font, etc...), refere to this. these are all the things that can be changed:
+
+```json
+{
+            "debug": {
+                "errorColor": "red",
+                "successColor": "green",
+                "infoColor": this._mainColor
+            },
+
+            "gui": {
+                "globalColor": this._mainColor,
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "left": "-3px",
+                "top": "-20px",
+                "title": "",
+                "borderColor": "gray",
+                "borderType": "double",
+                "borderThickness": "3px",
+                "borderRadius": "0px"
+            },
+
+            "buttons": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "10px"
+            },
+
+            "input": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "10px"
+            },
+
+            "dropdown": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "10px"
+            },
+
+            "checkbox": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "borderColor": "white",
+                "borderType": "double",
+                "borderThickness": "2px",
+                "borderRadius": "5px",
+                "toggledColor": "white"
+            }
+        };
+    }
+```
