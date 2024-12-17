@@ -72,6 +72,7 @@ const events = new UiLibEvents();
 class UiLibTheme {
     constructor() {
 
+
         this._theme = {
             "debug": {
                 "errorColor": "red",
@@ -89,7 +90,32 @@ class UiLibTheme {
                 "borderColor": "gray",
                 "borderType": "double",
                 "borderThickness": "3px",
-                "borderRadius": "0px"
+                "borderRadius": "0px",
+                "titleBorder": "double"
+            },
+
+            "tabs": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "left": "-3px",
+                "top": "-20px",
+                "title": "",
+                "borderColor": "gray",
+                "borderType": "double",
+                "borderThickness": "3px",
+                "borderRadius": "0px",
+                "selectedColor": "gray"
+            },
+
+            "tab_ctx": {
+                "borderType": "double",
+                "borderColor": "gray",
+                "borderThickness": "3px",
+                "borderRadius": "0px",
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white"
             },
 
             "buttons": {
@@ -153,9 +179,14 @@ class UiLib {
         this._guiHidden = false
     }
 
-    create_tab_ctx() {
-    const tabappend = document.createElement("div")
+    create_tab_ctx(position) {
+        const tabappend = document.createElement("div")
         tabappend.style.width = "auto"
+        tabappend.style.position = "relative"
+        tabappend.style.display = "flex"
+        tabappend.style.flexWrap = "nowrap";
+        tabappend.style.left = position[0]
+        tabappend.style.top = position[1]
         this._tabctx = tabappend
     }
 
@@ -163,32 +194,37 @@ class UiLib {
         const tab_ctx = document.createElement("div")
         tab_ctx.style.width = "auto"
 
-        tab_ctx.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
+        tab_ctx.style.border = `${this._theme.tab_ctx.borderThickness} ${this._theme.tab_ctx.borderType} ${this._theme.tab_ctx.borderColor}`
 
         this._tabctx.appendChild(tab_ctx)
         this._mainWindow.appendChild(this._tabctx)
     }
 
-    create_tab(tabname) {
+    create_tab(tabname, dimentions) {
         const tab = document.createElement("div")
         tab.innerText = tabname
-        tab.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
-        tab.style.backgroundColor = this._theme.gui.backgroundColor
+        tab.style.border = `${this._theme.tabs.borderThickness} ${this._theme.tabs.borderType} ${this._theme.tabs.borderColor}`
+        tab.style.backgroundColor = this._theme.tabs.backgroundColor
         tab.style.position = "relative"
         tab.style.display = "inline-block"
-        tab.style.color = this._theme.gui.textColor
-        tab.style.fontFamily = this._theme.gui.font
-        tab.style.width = "fit-content"
-        tab.style.height = "fit-content"
-
-        this._tabctx.appendChild(tab)
-
-        this._tabs.push(tab)
-
-        return tab
+        tab.style.color = this._theme.tabs.textColor
+        tab.style.fontFamily = this._theme.tabs.font
+        tab.style.width = dimentions[0]
+        tab.style.height = dimentions[1]
+    
+        tab.style.display = "flex";
+        tab.style.justifyContent = "center"
+        tab.style.alignItems = "center"
+    
+        this._tabctx.appendChild(tab);
+        this._tabs.push(tab);
+    
+        return tab;
     }
+    
 
     unload_tab(tabObj) {
+        tabObj.style.backgroundColor = this._theme.tabs.backgroundColor
         this._elements.forEach(elem => {
             elem.remove()
         })
@@ -202,7 +238,7 @@ class UiLib {
         winTitle.style.top = this._theme.gui.top;
         winTitle.style.borderTopLeftRadius = this._theme.gui.borderRadius
         winTitle.style.width = "fit-content"
-        winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
+        winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.titleBorder} ${this._theme.gui.borderColor}`
         winTitle.style.fontFamily = this._theme.gui.font;
         winTitle.innerHTML = title;
 
@@ -288,7 +324,7 @@ class UiLib {
         val.innerText = slider.value
         val.style.left = `${position[0] - 120}`;
         val.style.top = `${position[1]}`;
-        
+
         slider.addEventListener("change", () => {
             val.innerText = slider.value
         })

@@ -17,10 +17,10 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("4lpn's UI lib demo", ["280px","430px"])
+ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["280px","430px"])
 
 //for the tabs
-ui.create_tab_ctx() //tab context
+ui.create_tab_ctx(["0px", "-20px"]) //tab context
 const tab1 = ui.create_tab("combat")   // -
 const tab2 = ui.create_tab("movement") //  |
 const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
