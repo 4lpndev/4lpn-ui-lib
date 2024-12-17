@@ -130,7 +130,7 @@ here's an example tampermonkey script (tried on firefox):
 // @name         test lib
 // @namespace    http://tampermonkey.net/
 // @version      2024-12-16
-// @description  i'm on dat gud kush and alkahal 🔥🗣
+// @description  test for a ui library
 // @author       You
 // @match        https://REPLACE-ME-WITH-A-WEBSITE!!/
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
