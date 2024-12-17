@@ -204,7 +204,7 @@ class UiLib {
         winTitle.style.width = "fit-content"
         winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`
         winTitle.style.fontFamily = this._theme.gui.font;
-        winTitle.innerText = title;
+        winTitle.innerHTML = title;
 
         this._mainWindow = document.createElement("div");
         this._mainWindow.style.zIndex = 999999;
