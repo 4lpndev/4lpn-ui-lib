@@ -208,11 +208,10 @@ if you wish to change anything to the ui (ex. bg color, font, etc...), refere to
             "debug": {
                 "errorColor": "red",
                 "successColor": "green",
-                "infoColor": this._mainColor
+                "infoColor": "#4C4CE4"
             },
 
             "gui": {
-                "globalColor": this._mainColor,
                 "backgroundColor": "black",
                 "font": "monospace",
                 "textColor": "white",
@@ -265,6 +264,5 @@ if you wish to change anything to the ui (ex. bg color, font, etc...), refere to
                 "borderRadius": "5px",
                 "toggledColor": "white"
             }
-        };
-    }
+        }
 ```
