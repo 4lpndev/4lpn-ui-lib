@@ -21,11 +21,11 @@ ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["280px",
 
 //for the tabs
 ui.create_tab_ctx(["0px", "-20px"]) //tab context
-const tab1 = ui.create_tab("combat")   // -
-const tab2 = ui.create_tab("movement") //  |
-const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
-const tab4 = ui.create_tab("misc")     //  |
-const tab5 = ui.create_tab("exploits") // -
+const tab1 = ui.create_tab("aimbot", ["106px","60px"])
+const tab2 = ui.create_tab("aimbot", ["106px","60px"])
+const tab3 = ui.create_tab("aimbot", ["106px","60px"])
+const tab4 = ui.create_tab("aimbot", ["106px","60px"])
+const tab5 = ui.create_tab("aimbot", ["106px","60px"])
 ui.append_tab_ctx() //append tabs to window
 
 ui.append_window() //render window to main screen
