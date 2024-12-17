@@ -26,7 +26,7 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("<img src='./logo.png'  style='position: relative; z-index:999; width: 80px; top: 1px;'></img>", ["500px","430px"])
+ui.create_window("<img src='./logo.png'  style='position: relative; z-index:999; width: 80px; top: 1px;'></img>", ["600px","430px"])
 
 //for the tabs
 ui.create_tab_ctx(["77px", "-100px"]) //tab context

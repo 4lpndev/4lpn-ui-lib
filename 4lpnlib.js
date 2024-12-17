@@ -181,7 +181,8 @@ class UiLib {
 
     create_tab_ctx(position) {
         const tabappend = document.createElement("div")
-        tabappend.style.width = "auto"
+        tabappend.style.width = "calc(100% - 77px)"
+        tabappend.style.backgroundColor = this._theme.tabs.backgroundColor
         tabappend.style.position = "relative"
         tabappend.style.display = "flex"
         tabappend.style.flexWrap = "nowrap";
