@@ -468,7 +468,7 @@ class UiLibDebug {
     }
 
     error(message) {
-        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["errorColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["errorColor"]}`, message)
     }
 
     success(message) {
