@@ -39,7 +39,7 @@ functions:
 - `create_colorpicker(position)`: creates and returns a color picker in the window
 - `create_button(text, dimentions, position)`: creates and returns a button with the given dimentions and position
 - `create_slider(min, max, position)`: creates and returns a slider that
-- `create_label(text, position, backgroundColorOn)`: creates and returns text (backgroundColorOn needs to be true or false) (needs fix)
+- `create_label(text, position, backgroundColorOn, isWaterMark)`: creates and returns text (isWaterMark will make it so it's not removable) (backgroundColorOn needs to be true or false) (needs fix)
 - `create_input(placeholder, dimentions, position)`: creates and returns an input box
 - `create_checkbox(text, position, boxdim)`: creates and returns a checkbox
 - `create_dropdown(options, dimentions, position)`: creates and returns a dropdown menu

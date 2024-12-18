@@ -349,7 +349,7 @@ class UiLib {
         return slider
     }
 
-    create_label(text, position, backgroundColorOn) {
+    create_label(text, position, backgroundColorOn, isWaterMark) {
         const lab = document.createElement("span")
         lab.style.position = "relative"
         lab.innerText = text
@@ -363,7 +363,11 @@ class UiLib {
         lab.style.left = `${position[0]}`;
         lab.style.top = `${position[1]}`;
 
-        this._elements.push(lab)
+        if (isWaterMark) {
+            
+        } else {
+            this._elements.push(lab)
+        }
 
         this._mainWindow.appendChild(lab)
 
