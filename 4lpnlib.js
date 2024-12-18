@@ -157,6 +157,12 @@ class UiLibTheme {
                 "borderThickness": "2px",
                 "borderRadius": "5px",
                 "toggledColor": "white"
+            },
+
+            "label": {
+                "backgroundColor": "none",
+                "font": "monospace",
+                "textColor": "white"
             }
         };
     }
@@ -208,6 +214,7 @@ class UiLib {
     create_tab(tabname, dimentions) {
         const tab = document.createElement("div")
         tab.innerText = tabname
+        tab.style.cursor = "pointer"
         tab.style.border = `${this._theme.tabs.borderThickness} ${this._theme.tabs.borderType} ${this._theme.tabs.borderColor}`
         tab.style.backgroundColor = this._theme.tabs.backgroundColor
         tab.style.position = "relative"
@@ -342,12 +349,17 @@ class UiLib {
         return slider
     }
 
-    create_label(text, position) {
+    create_label(text, position, backgroundColorOn) {
         const lab = document.createElement("span")
         lab.style.position = "relative"
         lab.innerText = text
-        lab.style.color = this._theme.gui.textColor
-        lab.style.fontFamily = this._theme.gui.font
+        if (backgroundColorOn) {
+            lab.backgroundColor = this._theme.label.backgroundColor
+        } else {
+            lab.backgroundColor = "none"
+        }
+        lab.style.color = this._theme.label.textColor
+        lab.style.fontFamily = this._theme.label.font
         lab.style.left = `${position[0]}`;
         lab.style.top = `${position[1]}`;
 
