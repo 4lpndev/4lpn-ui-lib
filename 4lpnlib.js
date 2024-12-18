@@ -192,12 +192,16 @@ class UiLib {
     }
 
     append_tab_ctx() {
+        
+        /*
+        !useless, removing for now!
         const tab_ctx = document.createElement("div")
         tab_ctx.style.width = "auto"
 
         tab_ctx.style.border = `${this._theme.tab_ctx.borderThickness} ${this._theme.tab_ctx.borderType} ${this._theme.tab_ctx.borderColor}`
-
+        
         this._tabctx.appendChild(tab_ctx)
+        */
         this._mainWindow.appendChild(this._tabctx)
     }
 

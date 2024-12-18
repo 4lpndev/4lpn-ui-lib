@@ -20,14 +20,14 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["280px","430px"])
+ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
 
 //for the tabs
 ui.create_tab_ctx(["0px", "-20px"]) //tab context
-const tab1 = ui.create_tab("aimbot", ["106px","60px"])
-const tab2 = ui.create_tab("misc", ["106px","60px"])
-const tab3 = ui.create_tab("visuals", ["106px","60px"])
-const tab4 = ui.create_tab("movement", ["106px","60px"])
+const tab1 = ui.create_tab("aimbot", ["fit-content","fit-content"])
+const tab2 = ui.create_tab("misc", ["fit-content","fit-content"])
+const tab3 = ui.create_tab("visuals", ["fit-content","fit-content"])
+const tab4 = ui.create_tab("movement", ["fit-content","fit-content"])
 ui.append_tab_ctx() //append tabs to window
 
 ui.append_window() //render window to main screen
