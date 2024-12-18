@@ -464,7 +464,7 @@ class UiLib {
 
 class UiLibDebug {
     constructor() {
-        this._theme = ui._theme
+        this._theme = new UiLibTheme().get_theme()
     }
 
     error(message) {
