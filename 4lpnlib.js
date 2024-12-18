@@ -463,15 +463,19 @@ class UiLib {
 }
 
 class UiLibDebug {
+    constructor() {
+        this._theme = ui._theme
+    }
+
     error(message) {
         console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["errorColor"]}`, message)
     }
 
     success(message) {
-        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["successColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["successColor"]}`, message)
     }
 
     info(message) {
-        console.log("%c[4lpnUiLib]", `color: ${ui._theme["debug"]["infoColor"]}`, message)
+        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["infoColor"]}`, message)
     }
 }
