@@ -34,12 +34,12 @@ functions:
 - `create_tab_ctx(position)`: creates the bar separating the tabs from the rest with a given array for position
 - `append_tab_ctx()`: adds the `create_tab_ctx` to the main UI
 - `create_tab(tabname, dimentions)`: creates and returns a tab with the given name and dimentions
-- `unload_tab()`: unloads everything from previous tab
+- `unload_tab(tab)`: unloads everything from selected tab (needs rework)
 - `create_window(title, dimentions)`: creates the main window
 - `create_colorpicker(position)`: creates and returns a color picker in the window
 - `create_button(text, dimentions, position)`: creates and returns a button with the given dimentions and position
 - `create_slider(min, max, position)`: creates and returns a slider that
-- `create_label(text, position)`: creates and returns text
+- `create_label(text, position, backgroundColorOn)`: creates and returns text (backgroundColorOn needs to be true or false) (needs fix)
 - `create_input(placeholder, dimentions, position)`: creates and returns an input box
 - `create_checkbox(text, position, boxdim)`: creates and returns a checkbox
 - `create_dropdown(options, dimentions, position)`: creates and returns a dropdown menu
@@ -72,8 +72,11 @@ IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.g
 example: uiTheme._theme.gui.backgroundColor = "purple"
 refere to the theme structure in docs
 */
+uiTheme._theme.tab_ctx.borderColor = "none"
 ui._theme = uiTheme.get_theme()
 let th = ui._theme
+
+let prevTab = document.createElement("a")
 
 //for debugging
 dbg.info("this is an information")
@@ -81,124 +84,46 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("4lpn's UI lib demo", ["280px","430px"])
+ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
 
 //for the tabs
-ui.create_tab_ctx() //tab context
-const tab1 = ui.create_tab("combat")   // -
-const tab2 = ui.create_tab("movement") //  |
-const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
-const tab4 = ui.create_tab("misc")     //  |
-const tab5 = ui.create_tab("exploits") // -
+ui.create_tab_ctx(["0px", "-20px"]) //tab context
+const tab1 = ui.create_tab("aimbot", ["fit-content","fit-content"])
+const tab2 = ui.create_tab("misc", ["fit-content","fit-content"])
+const tab3 = ui.create_tab("visuals", ["fit-content","fit-content"])
+const tab4 = ui.create_tab("movement", ["fit-content","fit-content"])
 ui.append_tab_ctx() //append tabs to window
 
 ui.append_window() //render window to main screen
 
 //events and stuff
 tab1.addEventListener("click", () => {
-    ui.unload_tab() //add this before any actions
+    ui.unload_tab(prevTab) //add this before any actions
+    tab1.style.backgroundColor = th.tabs.selectedColor
     const label = ui.create_label("this is tab 1", ["20px","50px"])
+    prevTab = tab1
 })
 
 tab2.addEventListener("click", () => {
-    ui.unload_tab()
+    ui.unload_tab(prevTab)
+    tab2.style.backgroundColor = th.tabs.selectedColor
     const label = ui.create_label("this is tab 2", ["20px","50px"])
+    prevTab = tab2
 })
 
 tab3.addEventListener("click", () => {
-    ui.unload_tab()
+    ui.unload_tab(prevTab)
+    tab3.style.backgroundColor = th.tabs.selectedColor
     const label = ui.create_label("this is tab 3", ["20px","50px"])
+    prevTab = tab3
 })
 
 tab4.addEventListener("click", () => {
-    ui.unload_tab()
+    ui.unload_tab(prevTab)
+    tab4.style.backgroundColor = th.tabs.selectedColor
     const label = ui.create_label("this is tab 4", ["20px","50px"])
+    prevTab = tab4
 })
-
-tab5.addEventListener("click", () => {
-    ui.unload_tab()
-    const label = ui.create_label("this is tab 5", ["20px","50px"])
-})
-```
-
-# how to use in tampermonkey:
-
-here's an example tampermonkey script (tried on firefox):
-
-```js
-// ==UserScript==
-// @name         test lib
-// @namespace    http://tampermonkey.net/
-// @version      2024-12-16
-// @description  test for a ui library
-// @author       You
-// @match        https://REPLACE-ME-WITH-A-WEBSITE!!/
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-// @grant        none
-// @require      https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/main/4lpnlib.js
-// ==/UserScript==
-
-(function() {
-    'use strict';
-
-    //classes initialization
-    let uiTheme = new UiLibTheme()
-    const dbg = new UiLibDebug()
-    const ui = new UiLib()
-    /*
-    theme stuff
-    IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.get_theme()" line
-    example: uiTheme._theme.gui.backgroundColor = "purple"
-    refere to the theme structure in docs
-    */
-    ui._theme = uiTheme.get_theme()
-    let th = ui._theme
-
-    //for debugging
-    dbg.info("this is an information")
-    dbg.success("yay it works!! :D")
-    dbg.error("nooooo it doesn't work :(")
-
-    //creating the window
-    ui.create_window("4lpn's UI lib demo", ["280px","430px"])
-
-    //for the tabs
-    ui.create_tab_ctx() //tab context
-    const tab1 = ui.create_tab("combat")   // -
-    const tab2 = ui.create_tab("movement") //  |
-    const tab3 = ui.create_tab("visuals")  //  |-----> tabs (replace with the tabs needed)
-    const tab4 = ui.create_tab("misc")     //  |
-    const tab5 = ui.create_tab("exploits") // -
-    ui.append_tab_ctx() //append tabs to window
-
-    ui.append_window() //render window to main screen
-
-    //events and stuff
-    tab1.addEventListener("click", () => {
-        ui.unload_tab() //add this before any actions
-        const label = ui.create_label("this is tab 1", ["20px","50px"])
-    })
-
-    tab2.addEventListener("click", () => {
-        ui.unload_tab()
-        const label = ui.create_label("this is tab 2", ["20px","50px"])
-    })
-
-    tab3.addEventListener("click", () => {
-        ui.unload_tab()
-        const label = ui.create_label("this is tab 3", ["20px","50px"])
-    })
-
-    tab4.addEventListener("click", () => {
-        ui.unload_tab()
-        const label = ui.create_label("this is tab 4", ["20px","50px"])
-    })
-
-    tab5.addEventListener("click", () => {
-        ui.unload_tab()
-        const label = ui.create_label("this is tab 5", ["20px","50px"])
-    })
-})();
 ```
 
 if you wish to change anything to the ui (ex. bg color, font, etc...), refere to this. these are all the things that can be changed:
@@ -221,7 +146,32 @@ if you wish to change anything to the ui (ex. bg color, font, etc...), refere to
                 "borderColor": "gray",
                 "borderType": "double",
                 "borderThickness": "3px",
-                "borderRadius": "0px"
+                "borderRadius": "0px",
+                "titleBorder": "double"
+            },
+
+            "tabs": {
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white",
+                "left": "-3px",
+                "top": "-20px",
+                "title": "",
+                "borderColor": "gray",
+                "borderType": "double",
+                "borderThickness": "3px",
+                "borderRadius": "0px",
+                "selectedColor": "gray"
+            },
+
+            "tab_ctx": {
+                "borderType": "double",
+                "borderColor": "gray",
+                "borderThickness": "3px",
+                "borderRadius": "0px",
+                "backgroundColor": "black",
+                "font": "monospace",
+                "textColor": "white"
             },
 
             "buttons": {
@@ -263,6 +213,12 @@ if you wish to change anything to the ui (ex. bg color, font, etc...), refere to
                 "borderThickness": "2px",
                 "borderRadius": "5px",
                 "toggledColor": "white"
+            },
+
+            "label": {
+                "backgroundColor": "none",
+                "font": "monospace",
+                "textColor": "white"
             }
         }
 ```
