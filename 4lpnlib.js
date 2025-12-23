@@ -460,6 +460,46 @@ class UiLib {
     destroy_window() {
         this._mainWindow.remove();
     }
+
+    add_info_label(elem, infotext) {
+        let mx = 0;
+        let my = 0;
+
+        const label = document.createElement("p");
+        label.style.position = "absolute";
+        label.style.zIndex = "999999999";
+        label.className = "infolabel";
+        label.innerText = infotext;
+        label.style.border = this._theme.gui.borderType;
+        label.style.borderColor = this._theme.gui.borderColor;
+        label.style.color = this._theme.gui.textColor;
+        label.style.backgroundColor = this._theme.backgroundColor;
+        label.style.pointerEvents = "none";
+        label.style.fontFamily = this._theme.gui.font
+
+        document.addEventListener("mousemove", (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+
+            if (label.parentNode) {
+                label.style.left = mx + 10 + "px";
+                label.style.top = my + 10 + "px";
+            }
+        });
+
+        elem.addEventListener("mouseenter", () => {
+            if (!document.querySelector(".infolabel")) {
+                document.body.appendChild(label);
+            }
+        });
+
+        elem.addEventListener("mouseleave", () => {
+            if (label.parentNode) {
+                label.remove();
+            }
+        });
+    }
+
 }
 
 class UiLibDebug {
