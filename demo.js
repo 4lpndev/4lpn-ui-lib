@@ -37,7 +37,7 @@ tab1.addEventListener("click", () => {
     ui.unload_tab(prevTab) //add this before any actions
     tab1.style.backgroundColor = th.tabs.selectedColor
     const label = ui.create_label("this is tab 1", ["20px","50px"])
-    ui.add_info_label(label, "info here")
+    ui.add_info_label(label, "woaaaa cool label!!!")
     prevTab = tab1
 })
 
