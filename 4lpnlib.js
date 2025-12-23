@@ -466,6 +466,7 @@ class UiLib {
         let my = 0;
 
         const label = document.createElement("p");
+        label.style.backgroundColor = this._theme.gui.backgroundColor
         label.style.position = "absolute";
         label.style.zIndex = "999999999";
         label.className = "infolabel";
