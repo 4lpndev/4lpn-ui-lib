@@ -20,7 +20,7 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
+ui.window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
 
 //for the tabs
 ui.create_tab_ctx(["0px", "-20px"]) //tab context
@@ -36,28 +36,28 @@ ui.append_window() //render window to main screen
 tab1.addEventListener("click", () => {
     ui.unload_tab(prevTab) //add this before any actions
     tab1.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 1", ["20px","50px"])
-    ui.add_info_label(label, "woaaaa cool label!!!")
+    const label = ui.label("this is tab 1", ["20px","50px"])
+    ui.infolabel(label, "woaaaa cool label!!!")
     prevTab = tab1
 })
 
 tab2.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab2.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 2", ["20px","50px"])
+    const label = ui.label("this is tab 2", ["20px","50px"])
     prevTab = tab2
 })
 
 tab3.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab3.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 3", ["20px","50px"])
+    const label = ui.label("this is tab 3", ["20px","50px"])
     prevTab = tab3
 })
 
 tab4.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab4.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 4", ["20px","50px"])
+    const label = ui.label("this is tab 4", ["20px","50px"])
     prevTab = tab4
 })
