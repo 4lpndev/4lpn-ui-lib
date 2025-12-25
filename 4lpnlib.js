@@ -198,16 +198,6 @@ class UiLib {
     }
 
     append_tab_ctx() {
-        
-        /*
-        !useless, removing for now!
-        const tab_ctx = document.createElement("div")
-        tab_ctx.style.width = "auto"
-
-        tab_ctx.style.border = `${this._theme.tab_ctx.borderThickness} ${this._theme.tab_ctx.borderType} ${this._theme.tab_ctx.borderColor}`
-        
-        this._tabctx.appendChild(tab_ctx)
-        */
         this._mainWindow.appendChild(this._tabctx)
     }
 
@@ -242,7 +232,7 @@ class UiLib {
         })
     }
 
-    create_window(title, dimentions) {
+    window(title, dimentions) {
         const winTitle = document.createElement("h4");
         winTitle.style.position = "relative"
         winTitle.style.color = this._theme.gui.textColor;
@@ -283,7 +273,7 @@ class UiLib {
         this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
     }
 
-    create_colorpicker(position) {
+    colorpicker(position) {
         const cpicker = document.createElement("input")
         cpicker.type = "color"
         cpicker.style.position = "relative"
@@ -297,7 +287,7 @@ class UiLib {
         return cpicker
     }
 
-    create_button(text, dimentions, position) {
+    button(text, dimentions, position) {
         const btn = document.createElement("button");
         btn.style.fontFamily = this._theme.buttons.font;
         btn.style.width = `${dimentions[0]}`;
@@ -318,7 +308,7 @@ class UiLib {
         return btn
     }
 
-    create_slider(text, min, max, position) {
+    slider(text, min, max, position) {
         const slider = document.createElement("input")
         slider.style.position = "relative"
         slider.type = "range"
@@ -349,7 +339,7 @@ class UiLib {
         return slider
     }
 
-    create_label(text, position, backgroundColorOn, isWaterMark) {
+    label(text, position, backgroundColorOn, isWaterMark) {
         const lab = document.createElement("span")
         lab.style.position = "relative"
         lab.innerText = text
@@ -374,7 +364,7 @@ class UiLib {
         return lab
     }
 
-    create_input(placeholder, dimentions, position) {
+    input(placeholder, dimentions, position) {
         const inp = document.createElement("input")
         inp.placeholder = placeholder
         inp.style.position = "relative"
@@ -392,7 +382,7 @@ class UiLib {
         return inp
     }
 
-    create_checkbox(text, position, boxdim) {
+    checkbox(text, position, boxdim) {
         const checkbox = document.createElement("div")
         const label = document.createElement("span")
         checkbox.style.width = boxdim
@@ -423,7 +413,7 @@ class UiLib {
         return checkbox
     }
 
-    create_dropdown(label, options, dimentions, position) {
+    dropdown(label, options, dimentions, position) {
         const sel = document.createElement("select")
         sel.style.position = "relative"
         sel.style.backgroundColor = this._theme.dropdown.backgroundColor
@@ -461,7 +451,7 @@ class UiLib {
         this._mainWindow.remove();
     }
 
-    add_info_label(elem, infotext) {
+    infolabel(elem, infotext) {
         let mx = 0;
         let my = 0;
 

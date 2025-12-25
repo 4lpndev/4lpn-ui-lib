@@ -35,18 +35,18 @@ functions:
 - `append_tab_ctx()`: adds the `create_tab_ctx` to the main UI
 - `create_tab(tabname, dimentions)`: creates and returns a tab with the given name and dimentions
 - `unload_tab(tab)`: unloads everything from selected tab (needs rework)
-- `create_window(title, dimentions)`: creates the main window
-- `create_colorpicker(position)`: creates and returns a color picker in the window
-- `create_button(text, dimentions, position)`: creates and returns a button with the given dimentions and position
-- `create_slider(min, max, position)`: creates and returns a slider that
-- `create_label(text, position, backgroundColorOn, isWaterMark)`: creates and returns text (isWaterMark will make it so it's not removable) (backgroundColorOn needs to be true or false) (needs fix)
-- `create_input(placeholder, dimentions, position)`: creates and returns an input box
-- `create_checkbox(text, position, boxdim)`: creates and returns a checkbox
-- `create_dropdown(options, dimentions, position)`: creates and returns a dropdown menu
+- `window(title, dimentions)`: creates the main window
+- `colorpicker(position)`: creates and returns a color picker in the window
+- `button(text, dimentions, position)`: creates and returns a button with the given dimentions and position
+- `slider(min, max, position)`: creates and returns a slider that
+- `label(text, position, backgroundColorOn, isWaterMark)`: creates and returns text (isWaterMark will make it so it's not removable) (backgroundColorOn needs to be true or false) (needs fix)
+- `input(placeholder, dimentions, position)`: creates and returns an input box
+- `checkbox(text, position, boxdim)`: creates and returns a checkbox
+- `dropdown(options, dimentions, position)`: creates and returns a dropdown menu
 - `append_window()`: adds the window to the main site
 - `delete_element(elem)`: removes an element
 - `destroy_window()`: removes the whole window
-- `add_info_label(elem, infotext)`: creates a label when hovering over with mouse and goes away when no longer hovering
+- `infolabel(elem, infotext)`: creates a label when hovering over with mouse and goes away when no longer hovering
 
 ---
 
