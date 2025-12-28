@@ -27,7 +27,7 @@ dbg.success("yay it works!! :D")
 dbg.error("nooooo it doesn't work :(")
 
 //creating the window
-ui.create_window("<img src='./logo.png'  style='position: relative; z-index:999; width: 80px; top: 2px; left: 3px'></img>", ["600px","430px"])
+ui.window("<img src='./logo.png'  style='position: relative; z-index:999; width: 80px; top: 2px; left: 3px'></img>", ["600px","430px"])
 
 //for the tabs
 ui.create_tab_ctx(["77px", "-114px"]) //tab context
@@ -37,7 +37,7 @@ const tab3 = ui.create_tab("misc", ["106px","76px"])
 const tab4 = ui.create_tab("config", ["106px","76px"])
 ui.append_tab_ctx() //append tabs to window
 
-const tag = ui.create_label("meth.sol (bad) remake by 4lpn using 4lpn's ui lib", ["120px","220px"], true, true)
+const tag = ui.label("meth.sol (bad) remake by 4lpn using 4lpn's ui lib", ["120px","220px"], true, true)
 
 ui.append_window() //render window to main screen
 
@@ -45,27 +45,27 @@ ui.append_window() //render window to main screen
 tab1.addEventListener("click", () => {
     ui.unload_tab(prevTab) //add this before any actions
     tab1.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 1", ["-140px","50px"], false, false)
+    const label = ui.label("this is tab 1", ["-140px","50px"], false, false)
     prevTab = tab1
 })
 
 tab2.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab2.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 2", ["-140px","50px"], false, false)
+    const label = ui.label("this is tab 2", ["-140px","50px"], false, false)
     prevTab = tab2
 })
 
 tab3.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab3.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 3", ["-140px","50px"], false, false)
+    const label = ui.label("this is tab 3", ["-140px","50px"], false, false)
     prevTab = tab3
 })
 
 tab4.addEventListener("click", () => {
     ui.unload_tab(prevTab)
     tab4.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.create_label("this is tab 4", ["-140px","50px"], false, false)
+    const label = ui.label("this is tab 4", ["-140px","50px"], false, false)
     prevTab = tab4
 })
