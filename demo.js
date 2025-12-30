@@ -12,7 +12,7 @@ uiTheme._theme.tab_ctx.borderColor = "none"
 ui._theme = uiTheme.get_theme()
 let th = ui._theme
 
-let prevTab = document.createElement("a")
+//let prevTab = document.createElement("a")
 
 //for debugging
 dbg.info("this is an information")
@@ -34,30 +34,21 @@ ui.append_window() //render window to main screen
 
 //events and stuff
 tab1.addEventListener("click", () => {
-    ui.unload_tab(prevTab) //add this before any actions
-    tab1.style.backgroundColor = th.tabs.selectedColor
-    const label = ui.label("this is tab 1", ["20px","50px"])
     ui.infolabel(label, "woaaaa cool label!!!")
     prevTab = tab1
 })
 
 tab2.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab2.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 2", ["20px","50px"])
     prevTab = tab2
 })
 
 tab3.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab3.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 3", ["20px","50px"])
     prevTab = tab3
 })
 
 tab4.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab4.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 4", ["20px","50px"])
     prevTab = tab4
 })

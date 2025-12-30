@@ -39,33 +39,25 @@ ui.append_tab_ctx() //append tabs to window
 
 const tag = ui.label("meth.sol (bad) remake by 4lpn using 4lpn's ui lib", ["120px","220px"], true, true)
 
-ui.append_window() //render window to main screen
+ui.append_window()
 
 //events and stuff
 tab1.addEventListener("click", () => {
-    ui.unload_tab(prevTab) //add this before any actions
-    tab1.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 1", ["-140px","50px"], false, false)
     prevTab = tab1
 })
 
 tab2.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab2.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 2", ["-140px","50px"], false, false)
     prevTab = tab2
 })
 
 tab3.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab3.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 3", ["-140px","50px"], false, false)
     prevTab = tab3
 })
 
 tab4.addEventListener("click", () => {
-    ui.unload_tab(prevTab)
-    tab4.style.backgroundColor = th.tabs.selectedColor
     const label = ui.label("this is tab 4", ["-140px","50px"], false, false)
     prevTab = tab4
 })

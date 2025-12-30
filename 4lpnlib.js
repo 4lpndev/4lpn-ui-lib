@@ -201,6 +201,26 @@ class UiLib {
         this._mainWindow.appendChild(this._tabctx)
     }
 
+    _unload_tab(tabObj) {
+        tabObj.style.backgroundColor = this._theme.tabs.backgroundColor //why is this here?????
+        this._elements.forEach(elem => {
+            elem.remove()
+        })
+    }
+
+    _setCurrentTab(tab) {
+    this._currentTab = tab
+
+    this._tabs.forEach(t => {
+        if (t === tab) {
+            t.style.backgroundColor = this._theme.tabs.selectedColor
+        } else {
+            t.style.backgroundColor = this._theme.tabs.backgroundColor
+        }
+    })
+}
+
+
     create_tab(tabname, dimentions) {
         const tab = document.createElement("div")
         tab.innerText = tabname
@@ -217,6 +237,13 @@ class UiLib {
         tab.style.display = "flex";
         tab.style.justifyContent = "center"
         tab.style.alignItems = "center"
+
+        this._currentTab = tab
+
+        tab.addEventListener("click", ()=>{
+            this._unload_tab(tab)
+            this._setCurrentTab(tab)
+        })
     
         this._tabctx.appendChild(tab);
         this._tabs.push(tab);
@@ -224,13 +251,6 @@ class UiLib {
         return tab;
     }
     
-
-    unload_tab(tabObj) {
-        tabObj.style.backgroundColor = this._theme.tabs.backgroundColor
-        this._elements.forEach(elem => {
-            elem.remove()
-        })
-    }
 
     window(title, dimentions) {
         const winTitle = document.createElement("h4");
