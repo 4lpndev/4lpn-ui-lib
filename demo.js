@@ -34,6 +34,7 @@ ui.append_window() //render window to main screen
 
 //events and stuff
 tab1.addEventListener("click", () => {
+    const label = ui.label("this is tab 1", ["20px","50px"])
     ui.infolabel(label, "woaaaa cool label!!!")
     prevTab = tab1
 })
