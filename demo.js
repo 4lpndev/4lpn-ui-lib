@@ -9,7 +9,7 @@ example: uiTheme._theme.gui.backgroundColor = "purple"
 refere to the theme structure in docs
 */
 uiTheme._theme.tab_ctx.borderColor = "none"
-ui._theme = uiTheme.get_theme()
+ui._theme = uiTheme.get_theme("default") //use default so it loads the default theme
 let th = ui._theme
 
 //let prevTab = document.createElement("a")
