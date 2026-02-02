@@ -167,9 +167,25 @@ class UiLibTheme {
         };
     }
 
-    get_theme() {
-        return this._theme;
-    }
+    get_theme(url) { //use "default as argument to load the default theme"
+        if (url === "default") {
+            return this._theme;
+        } else {
+            fetch(url)
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('fetch response was not ok');
+            }
+            return response.json();
+            })
+            .then(data => {
+            this._theme = data
+            })
+            .catch(error => {
+            console.error('error loading theme:', error);
+            });
+                }
+            }
 }
 
 class UiLib {
