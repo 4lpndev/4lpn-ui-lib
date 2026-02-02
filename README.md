@@ -17,6 +17,6 @@ i was in professional school and we had to do an assignement where we had to do 
 
 docs are [here](https://github.com/4lpndev/4lpn-ui-lib/blob/main/DOCS.md)
 
-# feel free to join the [discord](https://discord.gg/8bxUXy3GdX)!
+~~# feel free to join the [discord](https://google.com)!~~ discord is everything but ready, once ready i'll make it redirect to the discord instead of google.
 
 ###### note: project is far from finished so there might be a lot of bugs
