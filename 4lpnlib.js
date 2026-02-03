@@ -167,7 +167,7 @@ class UiLibTheme {
         };
     }
 
-    get_theme(url) { //use "default as argument to load the default theme"
+    /*get_theme(url) { //use "default as argument to load the default theme"
         if (url === "default") {
             return this._theme;
         } else {
@@ -185,7 +185,11 @@ class UiLibTheme {
             console.error('error loading theme:', error);
             });
                 }
-            }
+            }*/ //(fix on dev branch)
+
+    get_theme() {
+        return this._theme:
+    }
 }
 
 class UiLib {
