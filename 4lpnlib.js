@@ -188,7 +188,7 @@ class UiLibTheme {
             }*/ //(fix on dev branch)
 
     get_theme() {
-        return this._theme:
+        return this._theme; // oh my fucking god i putted ":" instead of ";" fuckkkkkkk
     }
 }
 
