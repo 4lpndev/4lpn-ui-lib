@@ -171,28 +171,19 @@ class UiLibTheme {
     this._theme_url = url
   }
 
-  get_theme() {
-    console.log("get_theme called with:", this._theme_url); //debug stuff
-    if (this._theme_url === "default") {
-        return Promise.resolve(this._theme);
-
-    } else {
-      fetch(this._theme_url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("fetch response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data)
-          return data;
-        })
-        .catch((error) => {
-          console.error("error loading theme:", error);
-        });
+    get_default_theme() {
+        return this._theme
     }
-  } //(fix on dev branch)
+
+    async get_custom_theme() {
+    const response = await fetch(this._theme_url);
+    if (!response.ok) {
+        throw new Error("fetch response was not ok");
+    }
+    return await response.json();
+    }
+  
+  //(fix on dev branch)
   /*
     get_theme() {
         return this._theme; // oh my fucking god i putted ":" instead of ";" fuckkkkkkk

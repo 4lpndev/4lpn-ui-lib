@@ -1,7 +1,5 @@
 //classes initialization
 let uiTheme = new UiLibTheme()
-const dbg = new UiLibDebug()
-const ui = new UiLib()
 /*
 theme stuff
 IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.get_theme()" line
@@ -9,7 +7,9 @@ example: uiTheme._theme.gui.backgroundColor = "purple"
 refere to the theme structure in docs
 */
 uiTheme._theme.tab_ctx.borderColor = "none"
-ui._theme = uiTheme.get_theme()
+const ui = new UiLib()
+ui._theme = uiTheme.get_default_theme()
+const dbg = new UiLibDebug(ui._theme)
 let th = ui._theme
 
 //let prevTab = document.createElement("a")
