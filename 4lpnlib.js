@@ -1,552 +1,566 @@
 function dragElement(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.getElementById(elmnt.id + "header")) {
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    if (
+      e.target.tagName === "INPUT" ||
+      e.target.tagName === "SELECT" ||
+      e.target.className === "checkbox"
+    ) {
     } else {
-        elmnt.onmousedown = dragMouseDown;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
     }
+  }
 
-    function dragMouseDown(e) {
-        e = e || window.event;
-        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.className === "cb") {
-            ;
-        } else {
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-        }
-    }
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
 
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    }
-
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 
 class UiLibEvents {
-    constructor() {
-        this.listeners = {};
-    }
+  constructor() {
+    this.listeners = {};
+  }
 
-    addEventListener(eventType, listener) {
-        if (!this.listeners[eventType]) {
-            this.listeners[eventType] = [];
-        }
-        this.listeners[eventType].push(listener);
+  addEventListener(eventType, listener) {
+    if (!this.listeners[eventType]) {
+      this.listeners[eventType] = [];
     }
+    this.listeners[eventType].push(listener);
+  }
 
-    dispatchEvent(eventType, eventData) {
-        if (this.listeners[eventType]) {
-            this.listeners[eventType].forEach(listener => {
-                listener(eventData);
-            });
-        }
+  dispatchEvent(eventType, eventData) {
+    if (this.listeners[eventType]) {
+      this.listeners[eventType].forEach((listener) => {
+        listener(eventData);
+      });
     }
+  }
 
-    removeEventListener(eventType, listener) {
-        if (this.listeners[eventType]) {
-            const index = this.listeners[eventType].indexOf(listener);
-            if (index !== -1) {
-                this.listeners[eventType].splice(index, 1);
-            }
-        }
+  removeEventListener(eventType, listener) {
+    if (this.listeners[eventType]) {
+      const index = this.listeners[eventType].indexOf(listener);
+      if (index !== -1) {
+        this.listeners[eventType].splice(index, 1);
+      }
     }
+  }
 }
 
 const events = new UiLibEvents();
 
-
 class UiLibTheme {
-    constructor() {
+  constructor(url = "default") {
+    this._theme = {
+      debug: {
+        errorColor: "red",
+        successColor: "green",
+        infoColor: "#4C4CE4",
+      },
 
+      gui: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        left: "-3px",
+        top: "-20px",
+        title: "",
+        borderColor: "gray",
+        borderType: "double",
+        borderThickness: "3px",
+        borderRadius: "0px",
+        titleBorder: "double",
+      },
 
-        this._theme = {
-            "debug": {
-                "errorColor": "red",
-                "successColor": "green",
-                "infoColor": "#4C4CE4"
-            },
+      tabs: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        left: "-3px",
+        top: "-20px",
+        title: "",
+        borderColor: "gray",
+        borderType: "double",
+        borderThickness: "3px",
+        borderRadius: "0px",
+        selectedColor: "gray",
+      },
 
-            "gui": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "left": "-3px",
-                "top": "-20px",
-                "title": "",
-                "borderColor": "gray",
-                "borderType": "double",
-                "borderThickness": "3px",
-                "borderRadius": "0px",
-                "titleBorder": "double"
-            },
+      tab_ctx: {
+        borderType: "double",
+        borderColor: "gray",
+        borderThickness: "3px",
+        borderRadius: "0px",
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+      },
 
-            "tabs": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "left": "-3px",
-                "top": "-20px",
-                "title": "",
-                "borderColor": "gray",
-                "borderType": "double",
-                "borderThickness": "3px",
-                "borderRadius": "0px",
-                "selectedColor": "gray"
-            },
+      buttons: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        borderColor: "white",
+        borderType: "double",
+        borderThickness: "2px",
+        borderRadius: "10px",
+      },
 
-            "tab_ctx": {
-                "borderType": "double",
-                "borderColor": "gray",
-                "borderThickness": "3px",
-                "borderRadius": "0px",
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white"
-            },
+      input: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        borderColor: "white",
+        borderType: "double",
+        borderThickness: "2px",
+        borderRadius: "10px",
+      },
 
-            "buttons": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "borderColor": "white",
-                "borderType": "double",
-                "borderThickness": "2px",
-                "borderRadius": "10px"
-            },
+      dropdown: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        borderColor: "white",
+        borderType: "double",
+        borderThickness: "2px",
+        borderRadius: "10px",
+      },
 
-            "input": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "borderColor": "white",
-                "borderType": "double",
-                "borderThickness": "2px",
-                "borderRadius": "10px"
-            },
+      checkbox: {
+        backgroundColor: "black",
+        font: "monospace",
+        textColor: "white",
+        borderColor: "white",
+        borderType: "double",
+        borderThickness: "2px",
+        borderRadius: "5px",
+        toggledColor: "white",
+      },
 
-            "dropdown": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "borderColor": "white",
-                "borderType": "double",
-                "borderThickness": "2px",
-                "borderRadius": "10px"
-            },
+      label: {
+        backgroundColor: "none",
+        font: "monospace",
+        textColor: "white",
+      },
+    };
+    this._theme_url = url
+  }
 
-            "checkbox": {
-                "backgroundColor": "black",
-                "font": "monospace",
-                "textColor": "white",
-                "borderColor": "white",
-                "borderType": "double",
-                "borderThickness": "2px",
-                "borderRadius": "5px",
-                "toggledColor": "white"
-            },
+  get_theme() {
+    console.log("get_theme called with:", this._theme_url); //debug stuff
+    if (this._theme_url === "default") {
+        return Promise.resolve(this._theme);
 
-            "label": {
-                "backgroundColor": "none",
-                "font": "monospace",
-                "textColor": "white"
-            }
-        };
+    } else {
+      fetch(this._theme_url)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("fetch response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data)
+          return data;
+        })
+        .catch((error) => {
+          console.error("error loading theme:", error);
+        });
     }
-
-    /*get_theme(url) { //use "default as argument to load the default theme"
-        if (url === "default") {
-            return this._theme;
-        } else {
-            fetch(url)
-            .then(response => {
-            if (!response.ok) {
-                throw new Error('fetch response was not ok');
-            }
-            return response.json();
-            })
-            .then(data => {
-            this._theme = data
-            })
-            .catch(error => {
-            console.error('error loading theme:', error);
-            });
-                }
-            }*/ //(fix on dev branch)
-
+  } //(fix on dev branch)
+  /*
     get_theme() {
         return this._theme; // oh my fucking god i putted ":" instead of ";" fuckkkkkkk
-    }
+    }*/
 }
 
 class UiLib {
-    constructor() {
-        this._mainWindow = null;
-        this._theme = null;
-        this._tabs = []
-        this._tabctx = null
-        this._elements = []
-        this._currentTab = null
-        this._events = events
-        this._guiBind = "ShiftRight"
-        this._guiHidden = false
-    }
+  constructor(theme) {
+    this._mainWindow = null;
+    this._theme = theme;
+    this._tabs = [];
+    this._tabctx = null;
+    this._elements = [];
+    this._currentTab = null;
+    this._events = events;
+    this._guiBind = "ShiftRight";
+    this._guiHidden = false;
+  }
 
-    create_tab_ctx(position) {
-        const tabappend = document.createElement("div")
-        tabappend.style.width = "calc(100% - 77px)"
-        tabappend.style.backgroundColor = this._theme.tabs.backgroundColor
-        tabappend.style.position = "relative"
-        tabappend.style.display = "flex"
-        tabappend.style.flexWrap = "nowrap";
-        tabappend.style.left = position[0]
-        tabappend.style.top = position[1]
-        this._tabctx = tabappend
-    }
+  create_tab_ctx(position) {
+    const tabappend = document.createElement("div");
+    tabappend.style.width = "calc(100% - 77px)";
+    tabappend.style.backgroundColor = this._theme.tabs.backgroundColor;
+    tabappend.style.position = "relative";
+    tabappend.style.display = "flex";
+    tabappend.style.flexWrap = "nowrap";
+    tabappend.style.left = position[0];
+    tabappend.style.top = position[1];
+    this._tabctx = tabappend;
+  }
 
-    append_tab_ctx() {
-        this._mainWindow.appendChild(this._tabctx)
-    }
+  append_tab_ctx() {
+    this._mainWindow.appendChild(this._tabctx);
+  }
 
-    _unload_tab(tabObj) {
-        tabObj.style.backgroundColor = this._theme.tabs.backgroundColor //why is this here?????
-        this._elements.forEach(elem => {
-            elem.remove()
-        })
-    }
+  _unload_tab(tabObj) {
+    tabObj.style.backgroundColor = this._theme.tabs.backgroundColor; //why is this here?????
+    this._elements.forEach((elem) => {
+      elem.remove();
+    });
+  }
 
-    _setCurrentTab(tab) {
-    this._currentTab = tab
+  _setCurrentTab(tab) {
+    this._currentTab = tab;
 
-    this._tabs.forEach(t => {
-        if (t === tab) {
-            t.style.backgroundColor = this._theme.tabs.selectedColor
+    this._tabs.forEach((t) => {
+      if (t === tab) {
+        t.style.backgroundColor = this._theme.tabs.selectedColor;
+      } else {
+        t.style.backgroundColor = this._theme.tabs.backgroundColor;
+      }
+    });
+  }
+
+  create_tab(tabname, dimentions) {
+    const tab = document.createElement("div");
+    tab.innerText = tabname;
+    tab.style.cursor = "pointer";
+    tab.style.border = `${this._theme.tabs.borderThickness} ${this._theme.tabs.borderType} ${this._theme.tabs.borderColor}`;
+    tab.style.backgroundColor = this._theme.tabs.backgroundColor;
+    tab.style.position = "relative";
+    tab.style.display = "inline-block";
+    tab.style.color = this._theme.tabs.textColor;
+    tab.style.fontFamily = this._theme.tabs.font;
+    tab.style.width = dimentions[0];
+    tab.style.height = dimentions[1];
+
+    tab.style.display = "flex";
+    tab.style.justifyContent = "center";
+    tab.style.alignItems = "center";
+
+    this._currentTab = tab;
+
+    tab.addEventListener("click", () => {
+      this._unload_tab(tab);
+      this._setCurrentTab(tab);
+    });
+
+    this._tabctx.appendChild(tab);
+    this._tabs.push(tab);
+
+    return tab;
+  }
+
+  window(title, dimentions) {
+    const winTitle = document.createElement("h4");
+    winTitle.style.position = "relative";
+    winTitle.style.color = this._theme.gui.textColor;
+    winTitle.style.left = this._theme.gui.left;
+    winTitle.style.top = this._theme.gui.top;
+    winTitle.style.borderTopLeftRadius = this._theme.gui.borderRadius;
+    winTitle.style.width = "fit-content";
+    winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.titleBorder} ${this._theme.gui.borderColor}`;
+    winTitle.style.fontFamily = this._theme.gui.font;
+    winTitle.innerHTML = title;
+
+    this._mainWindow = document.createElement("div");
+    this._mainWindow.style.zIndex = 999999;
+    this._mainWindow.style.position = "absolute";
+    this._mainWindow.style.width = `${dimentions[0]}`;
+    this._mainWindow.style.height = `${dimentions[1]}`;
+    this._mainWindow.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`;
+    this._mainWindow.style.borderRadius = this._theme.gui.borderRadius;
+    this._mainWindow.style.backgroundColor = this._theme.gui.backgroundColor;
+
+    document.body.addEventListener("keydown", (e) => {
+      if (e.code == this._guiBind) {
+        this._guiHidden = !this._guiHidden;
+        if (this._guiHidden) {
+          this._mainWindow.style.display = "none";
         } else {
-            t.style.backgroundColor = this._theme.tabs.backgroundColor
+          this._mainWindow.style.display = "block";
         }
-    })
-}
+      }
+    });
 
+    this._mainWindow.appendChild(winTitle);
+  }
 
-    create_tab(tabname, dimentions) {
-        const tab = document.createElement("div")
-        tab.innerText = tabname
-        tab.style.cursor = "pointer"
-        tab.style.border = `${this._theme.tabs.borderThickness} ${this._theme.tabs.borderType} ${this._theme.tabs.borderColor}`
-        tab.style.backgroundColor = this._theme.tabs.backgroundColor
-        tab.style.position = "relative"
-        tab.style.display = "inline-block"
-        tab.style.color = this._theme.tabs.textColor
-        tab.style.fontFamily = this._theme.tabs.font
-        tab.style.width = dimentions[0]
-        tab.style.height = dimentions[1]
-    
-        tab.style.display = "flex";
-        tab.style.justifyContent = "center"
-        tab.style.alignItems = "center"
+  update_window() {
+    const th = this._theme;
+    this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
+  }
 
-        this._currentTab = tab
+  colorpicker(position) {
+    const cpicker = document.createElement("input");
+    cpicker.type = "color";
+    cpicker.style.position = "relative";
+    cpicker.style.left = position[0];
+    cpicker.style.top = position[1];
 
-        tab.addEventListener("click", ()=>{
-            this._unload_tab(tab)
-            this._setCurrentTab(tab)
-        })
-    
-        this._tabctx.appendChild(tab);
-        this._tabs.push(tab);
-    
-        return tab;
+    this._mainWindow.appendChild(cpicker);
+
+    this._elements.push(cpicker);
+
+    return cpicker;
+  }
+
+  button(text, dimentions, position) {
+    const btn = document.createElement("button");
+    btn.style.fontFamily = this._theme.buttons.font;
+    btn.style.width = `${dimentions[0]}`;
+    btn.style.height = `${dimentions[1]}`;
+    btn.style.position = "relative";
+    btn.style.left = `${position[0]}`;
+    btn.style.top = `${position[1]}`;
+    btn.style.backgroundColor = this._theme.buttons.backgroundColor;
+    btn.style.color = this._theme.buttons.textColor;
+    btn.style.border = `${this._theme.buttons.borderThickness} ${this._theme.buttons.borderType} ${this._theme.buttons.borderColor}`;
+    btn.style.borderRadius = this._theme.buttons.borderRadius;
+    btn.innerText = text;
+
+    this._elements.push(btn);
+
+    this._mainWindow.appendChild(btn);
+
+    return btn;
+  }
+
+  slider(text, min, max, position) {
+    const slider = document.createElement("input");
+    slider.style.position = "relative";
+    slider.type = "range";
+    slider.min = min;
+    slider.max = max;
+    slider.style.color = this._theme.gui.textColor;
+    slider.style.fontFamily = this._theme.gui.font;
+    slider.style.left = `${position[0]}`;
+    slider.style.top = `${position[1]}`;
+
+    const val = document.createElement("span");
+    val.style.position = "relative";
+    val.style.color = this._theme.gui.textColor;
+    val.style.fontFamily = this._theme.gui.font;
+    val.innerText = slider.value;
+    val.style.left = `${position[0] - 120}`;
+    val.style.top = `${position[1]}`;
+
+    slider.addEventListener("change", () => {
+      val.innerText = slider.value;
+    });
+
+    this._elements.push(slider);
+    this._elements.push(val);
+    this._mainWindow.appendChild(val);
+    this._mainWindow.appendChild(slider);
+
+    return slider;
+  }
+
+  label(text, position, backgroundColorOn, isWaterMark) {
+    const lab = document.createElement("span");
+    lab.style.position = "relative";
+    lab.innerText = text;
+    if (backgroundColorOn) {
+      lab.backgroundColor = this._theme.label.backgroundColor;
+    } else {
+      lab.backgroundColor = "none";
     }
-    
+    lab.style.color = this._theme.label.textColor;
+    lab.style.fontFamily = this._theme.label.font;
+    lab.style.left = `${position[0]}`;
+    lab.style.top = `${position[1]}`;
 
-    window(title, dimentions) {
-        const winTitle = document.createElement("h4");
-        winTitle.style.position = "relative"
-        winTitle.style.color = this._theme.gui.textColor;
-        winTitle.style.left = this._theme.gui.left;
-        winTitle.style.top = this._theme.gui.top;
-        winTitle.style.borderTopLeftRadius = this._theme.gui.borderRadius
-        winTitle.style.width = "fit-content"
-        winTitle.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.titleBorder} ${this._theme.gui.borderColor}`
-        winTitle.style.fontFamily = this._theme.gui.font;
-        winTitle.innerHTML = title;
-
-        this._mainWindow = document.createElement("div");
-        this._mainWindow.style.zIndex = 999999;
-        this._mainWindow.style.position = "absolute";
-        this._mainWindow.style.width = `${dimentions[0]}`;
-        this._mainWindow.style.height = `${dimentions[1]}`;
-        this._mainWindow.style.border = `${this._theme.gui.borderThickness} ${this._theme.gui.borderType} ${this._theme.gui.borderColor}`;
-        this._mainWindow.style.borderRadius = this._theme.gui.borderRadius
-        this._mainWindow.style.backgroundColor = this._theme.gui.backgroundColor;
-
-
-        document.body.addEventListener("keydown", (e) => {
-            if (e.code == this._guiBind) {
-                this._guiHidden = !this._guiHidden
-                if (this._guiHidden) {
-                    this._mainWindow.style.display = "none"
-                } else {
-                    this._mainWindow.style.display = "block"
-                }
-            }
-        })
-
-        this._mainWindow.appendChild(winTitle);
-    }
-
-    update_window() {
-        const th = this._theme;
-        this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
-    }
-
-    colorpicker(position) {
-        const cpicker = document.createElement("input")
-        cpicker.type = "color"
-        cpicker.style.position = "relative"
-        cpicker.style.left = position[0]
-        cpicker.style.top = position[1]
-
-        this._mainWindow.appendChild(cpicker)
-
-        this._elements.push(cpicker)
-
-        return cpicker
-    }
-
-    button(text, dimentions, position) {
-        const btn = document.createElement("button");
-        btn.style.fontFamily = this._theme.buttons.font;
-        btn.style.width = `${dimentions[0]}`;
-        btn.style.height = `${dimentions[1]}`;
-        btn.style.position = "relative";
-        btn.style.left = `${position[0]}`;
-        btn.style.top = `${position[1]}`;
-        btn.style.backgroundColor = this._theme.buttons.backgroundColor;
-        btn.style.color = this._theme.buttons.textColor;
-        btn.style.border = `${this._theme.buttons.borderThickness} ${this._theme.buttons.borderType} ${this._theme.buttons.borderColor}`;
-        btn.style.borderRadius = this._theme.buttons.borderRadius
-        btn.innerText = text;
-
-        this._elements.push(btn)
-
-        this._mainWindow.appendChild(btn);
-
-        return btn
+    if (isWaterMark) {
+    } else {
+      this._elements.push(lab);
     }
 
-    slider(text, min, max, position) {
-        const slider = document.createElement("input")
-        slider.style.position = "relative"
-        slider.type = "range"
-        slider.min = min
-        slider.max = max
-        slider.style.color = this._theme.gui.textColor
-        slider.style.fontFamily = this._theme.gui.font
-        slider.style.left = `${position[0]}`;
-        slider.style.top = `${position[1]}`;
+    this._mainWindow.appendChild(lab);
 
-        const val = document.createElement("span")
-        val.style.position = "relative"
-        val.style.color = this._theme.gui.textColor
-        val.style.fontFamily = this._theme.gui.font
-        val.innerText = slider.value
-        val.style.left = `${position[0] - 120}`;
-        val.style.top = `${position[1]}`;
+    return lab;
+  }
 
-        slider.addEventListener("change", () => {
-            val.innerText = slider.value
-        })
+  input(placeholder, dimentions, position) {
+    const inp = document.createElement("input");
+    inp.placeholder = placeholder;
+    inp.style.position = "relative";
+    inp.style.left = `${position[0]}`;
+    inp.style.top = `${position[1]}`;
+    inp.style.width = `${dimentions[0]}`;
+    inp.style.height = `${dimentions[1]}`;
+    inp.style.border = `${this._theme.input.borderThickness} ${this._theme.input.borderType} ${this._theme.input.borderColor}`;
+    inp.style.backgroundColor = this._theme.gui.backgroundColor;
+    inp.style.color = this._theme.gui.textColor;
+    this._mainWindow.appendChild(inp);
 
-        this._elements.push(slider)
-        this._elements.push(val)
-        this._mainWindow.appendChild(val)
-        this._mainWindow.appendChild(slider)
+    this._elements.push(inp);
 
-        return slider
-    }
+    return inp;
+  }
 
-    label(text, position, backgroundColorOn, isWaterMark) {
-        const lab = document.createElement("span")
-        lab.style.position = "relative"
-        lab.innerText = text
-        if (backgroundColorOn) {
-            lab.backgroundColor = this._theme.label.backgroundColor
-        } else {
-            lab.backgroundColor = "none"
-        }
-        lab.style.color = this._theme.label.textColor
-        lab.style.fontFamily = this._theme.label.font
-        lab.style.left = `${position[0]}`;
-        lab.style.top = `${position[1]}`;
+  checkbox(text, position, boxdim) {
+    const checkbox = document.createElement("div");
+    const label = document.createElement("span");
+    checkbox.style.width = boxdim;
+    checkbox.style.height = boxdim;
+    checkbox.style.position = "relative";
+    checkbox.style.border = `${this._theme.gui.borderThickness} ${this._theme.checkbox.borderType} ${this._theme.checkbox.borderColor}`;
 
-        if (isWaterMark) {
-            
-        } else {
-            this._elements.push(lab)
-        }
+    checkbox.style.left = position[0];
+    checkbox.style.top = position[1];
 
-        this._mainWindow.appendChild(lab)
+    checkbox.classList.add("checkbox");
 
-        return lab
-    }
+    label.style.fontFamily = this._theme.gui.font;
+    label.style.position = "relative";
+    label.style.left = `calc(${position[0]} + 30px)`;
+    label.style.top = `calc(${position[1]} - 20px)`;
+    label.style.color = this._theme.gui.textColor;
+    label.innerText = text;
 
-    input(placeholder, dimentions, position) {
-        const inp = document.createElement("input")
-        inp.placeholder = placeholder
-        inp.style.position = "relative"
-        inp.style.left = `${position[0]}`
-        inp.style.top = `${position[1]}`
-        inp.style.width = `${dimentions[0]}`
-        inp.style.height = `${dimentions[1]}`
-        inp.style.border = `${this._theme.input.borderThickness} ${this._theme.input.borderType} ${this._theme.input.borderColor}`;
-        inp.style.backgroundColor = this._theme.gui.backgroundColor
-        inp.style.color = this._theme.gui.textColor
-        this._mainWindow.appendChild(inp)
+    let toggled = false;
 
-        this._elements.push(inp)
+    this._elements.push(checkbox);
+    this._elements.push(label);
 
-        return inp
-    }
+    this._mainWindow.appendChild(checkbox);
+    this._mainWindow.appendChild(label);
 
-    checkbox(text, position, boxdim) {
-        const checkbox = document.createElement("div")
-        const label = document.createElement("span")
-        checkbox.style.width = boxdim
-        checkbox.style.height = boxdim
-        checkbox.style.position = "relative"
-        checkbox.style.border = `${this._theme.gui.borderThickness} ${this._theme.checkbox.borderType} ${this._theme.checkbox.borderColor}`;
+    return checkbox;
+  }
 
-        checkbox.style.left = position[0]
-        checkbox.style.top = position[1]
+  dropdown(label, options, dimentions, position) {
+    const sel = document.createElement("select");
+    sel.style.position = "relative";
+    sel.style.backgroundColor = this._theme.dropdown.backgroundColor;
+    sel.style.border = `${this._theme.dropdown.borderThickness} ${this._theme.dropdown.borderType} ${this._theme.dropdown.borderColor}`;
+    sel.style.color = this._theme.dropdown.textColor;
+    sel.style.borderRadius = this._theme.dropdown.borderRadius;
+    sel.style.left = position[0];
+    sel.style.top = position[1];
+    sel.style.width = dimentions[0];
+    sel.style.height = dimentions[1];
+    options.forEach((opts) => {
+      const opt = document.createElement("option");
+      opt.value = opts;
+      opt.innerText = opts;
+      sel.appendChild(opt);
+    });
 
-        checkbox.classList.add("cb")
+    this._elements.push(sel);
 
-        label.style.fontFamily = this._theme.gui.font
-        label.style.position = "relative"
-        label.style.left = `calc(${position[0]} + 30px)`
-        label.style.top = `calc(${position[1]} - 20px)`
-        label.style.color = this._theme.gui.textColor
-        label.innerText = text
+    this._mainWindow.appendChild(sel);
 
-        let toggled = false
+    return sel;
+  }
 
-        this._elements.push(checkbox)
-        this._elements.push(label)
+  append_window() {
+    document.body.appendChild(this._mainWindow);
+    dragElement(this._mainWindow);
+  }
 
-        this._mainWindow.appendChild(checkbox)
-        this._mainWindow.appendChild(label)
+  delete_element(elem) {
+    elem.remove();
+  }
 
-        return checkbox
-    }
+  destroy_window() {
+    this._mainWindow.remove();
+  }
 
-    dropdown(label, options, dimentions, position) {
-        const sel = document.createElement("select")
-        sel.style.position = "relative"
-        sel.style.backgroundColor = this._theme.dropdown.backgroundColor
-        sel.style.border = `${this._theme.dropdown.borderThickness} ${this._theme.dropdown.borderType} ${this._theme.dropdown.borderColor}`;
-        sel.style.color = this._theme.dropdown.textColor
-        sel.style.borderRadius = this._theme.dropdown.borderRadius
-        sel.style.left = position[0]
-        sel.style.top = position[1]
-        sel.style.width = dimentions[0]
-        sel.style.height = dimentions[1]
-        options.forEach(opts => {
-            const opt = document.createElement("option")
-            opt.value = opts
-            opt.innerText = opts
-            sel.appendChild(opt)
-        })
+  infolabel(elem, infotext) {
+    let mx = 0;
+    let my = 0;
 
-        this._elements.push(sel)
+    const label = document.createElement("p");
+    label.style.backgroundColor = this._theme.gui.backgroundColor;
+    label.style.position = "absolute";
+    label.style.zIndex = "999999999";
+    label.className = "infolabel";
+    label.innerText = infotext;
+    label.style.border = this._theme.gui.borderType;
+    label.style.borderColor = this._theme.gui.borderColor;
+    label.style.color = this._theme.gui.textColor;
+    label.style.backgroundColor = this._theme.backgroundColor;
+    label.style.pointerEvents = "none";
+    label.style.fontFamily = this._theme.gui.font;
 
-        this._mainWindow.appendChild(sel)
+    document.addEventListener("mousemove", (e) => {
+      mx = e.clientX;
+      my = e.clientY;
 
-        return sel
-    }
+      if (label.parentNode) {
+        label.style.left = mx + 10 + "px";
+        label.style.top = my + 10 + "px";
+      }
+    });
 
-    append_window() {
-        document.body.appendChild(this._mainWindow);
-        dragElement(this._mainWindow);
-    }
+    elem.addEventListener("mouseenter", () => {
+      if (!document.querySelector(".infolabel")) {
+        document.body.appendChild(label);
+      }
+    });
 
-    delete_element(elem) {
-        elem.remove()
-    }
-
-    destroy_window() {
-        this._mainWindow.remove();
-    }
-
-    infolabel(elem, infotext) {
-        let mx = 0;
-        let my = 0;
-
-        const label = document.createElement("p");
-        label.style.backgroundColor = this._theme.gui.backgroundColor
-        label.style.position = "absolute";
-        label.style.zIndex = "999999999";
-        label.className = "infolabel";
-        label.innerText = infotext;
-        label.style.border = this._theme.gui.borderType;
-        label.style.borderColor = this._theme.gui.borderColor;
-        label.style.color = this._theme.gui.textColor;
-        label.style.backgroundColor = this._theme.backgroundColor;
-        label.style.pointerEvents = "none";
-        label.style.fontFamily = this._theme.gui.font
-
-        document.addEventListener("mousemove", (e) => {
-            mx = e.clientX;
-            my = e.clientY;
-
-            if (label.parentNode) {
-                label.style.left = mx + 10 + "px";
-                label.style.top = my + 10 + "px";
-            }
-        });
-
-        elem.addEventListener("mouseenter", () => {
-            if (!document.querySelector(".infolabel")) {
-                document.body.appendChild(label);
-            }
-        });
-
-        elem.addEventListener("mouseleave", () => {
-            if (label.parentNode) {
-                label.remove();
-            }
-        });
-    }
-
+    elem.addEventListener("mouseleave", () => {
+      if (label.parentNode) {
+        label.remove();
+      }
+    });
+  }
 }
 
 class UiLibDebug {
-    constructor() {
-        this._theme = new UiLibTheme().get_theme()
-    }
+  constructor(theme) {
+    this._theme = theme; //oh my fucking got that was the issue...
+  }
 
-    error(message) {
-        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["errorColor"]}`, message)
-    }
+  error(message) {
+    console.log(
+      "%c[4lpnUiLib]",
+      `color: ${this._theme["debug"]["errorColor"]}`,
+      message,
+    );
+  }
 
-    success(message) {
-        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["successColor"]}`, message)
-    }
+  success(message) {
+    console.log(
+      "%c[4lpnUiLib]",
+      `color: ${this._theme["debug"]["successColor"]}`,
+      message,
+    );
+  }
 
-    info(message) {
-        console.log("%c[4lpnUiLib]", `color: ${this._theme["debug"]["infoColor"]}`, message)
-    }
+  info(message) {
+    console.log(
+      "%c[4lpnUiLib]",
+      `color: ${this._theme["debug"]["infoColor"]}`,
+      message,
+    );
+  }
 }

@@ -1,16 +1,15 @@
 //classes initialization
-let uiTheme = new UiLibTheme()
-const dbg = new UiLibDebug()
-const ui = new UiLib()
+let uiTheme = new UiLibTheme("http://127.0.0.1:3000/test_jsonload.json")
+const theme = await uiTheme.get_theme()
+const ui = new UiLib(theme)
+const dbg = new UiLibDebug(theme)
 /*
 theme stuff
 IMPORTANT: if you want to customize stuff, put before the "ui._theme = uiTheme.get_theme()" line
 example: uiTheme._theme.gui.backgroundColor = "purple"
 refere to the theme structure in docs
 */
-uiTheme._theme.tab_ctx.borderColor = "none"
-ui._theme = uiTheme.get_theme("https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/main/test_jsonload.json")
-let th = ui._theme
+//let th = ui._theme
 
 //let prevTab = document.createElement("a")
 
