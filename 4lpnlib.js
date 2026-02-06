@@ -14,7 +14,8 @@ function dragElement(elmnt) {
     if (
       e.target.tagName === "INPUT" ||
       e.target.tagName === "SELECT" ||
-      e.target.className === "checkbox"
+      e.target.className === "checkbox" ||
+      e.target.className === "textarea"
     ) {
     } else {
       e.preventDefault();
@@ -167,6 +168,16 @@ class UiLibTheme {
         font: "monospace",
         textColor: "white",
       },
+
+      textarea: {
+        backgroundColor: "white",
+        font: "monospace",
+        textColor: "black",
+        borderColor: "white",
+        borderType: "double",
+        borderThickness: "2px",
+        borderRadius: "5px",
+      }
     };
     this._theme_url = url
   }
@@ -441,7 +452,7 @@ class UiLib {
     return checkbox;
   }
 
-  dropdown(label, options, dimentions, position) {
+  dropdown(options, dimentions, position) {
     const sel = document.createElement("select");
     sel.style.position = "relative";
     sel.style.backgroundColor = this._theme.dropdown.backgroundColor;
@@ -464,6 +475,27 @@ class UiLib {
     this._mainWindow.appendChild(sel);
 
     return sel;
+  }
+
+  textarea(dimentions, position) {
+    const textarea = document.createElement("textarea");
+    textarea.classList.add("textarea");
+    textarea.style.position = "relative";
+    textarea.style.resize = "none";
+    textarea.style.backgroundColor = this._theme.textarea.backgroundColor;
+    textarea.style.border = `${this._theme.textarea.borderThickness} ${this._theme.textarea.borderType} ${this._theme.textarea.borderColor}`;
+    textarea.style.color = this._theme.textarea.textColor;
+    textarea.style.borderRadius = this._theme.textarea.borderRadius;
+    textarea.style.left = position[0];
+    textarea.style.top = position[1];
+    textarea.style.width = dimentions[0];
+    textarea.style.height = dimentions[1];
+
+    this._elements.push(textarea);
+
+    this._mainWindow.appendChild(textarea);
+
+    return textarea;
   }
 
   append_window() {
@@ -522,7 +554,7 @@ class UiLib {
 
 class UiLibDebug {
   constructor(theme) {
-    this._theme = theme; //oh my fucking got that was the issue...
+    this._theme = theme;
   }
 
   error(message) {
