@@ -1,8 +1,8 @@
 # 4lpn-ui-lib
-simple usage ui library made in js that can be used for practically anything
+simple usage ui library made in js that can be used for cheat making
 ---
 # why make this project tho?
-i was in professional school and we had to do an assignement where we had to do a small web UI and i realized that it's a shit ton of lines of code just for the UI and i told myself "why not make it easier?" so i made this :D
+i was looking at the source code of a venge.io cheat and i told myself "damn all these lines just for the UI?" and i tought to myself "what if there was a way to make it easier to make the UIs?" then i started working on this in dec. 2024.
 ---
 # things in it:
 
