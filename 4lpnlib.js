@@ -182,12 +182,6 @@ class UiLibTheme {
     }
     return await response.json();
     }
-  
-  //(fix on dev branch)
-  /*
-    get_theme() {
-        return this._theme; // oh my fucking god i putted ":" instead of ";" fuckkkkkkk
-    }*/
 }
 
 class UiLib {

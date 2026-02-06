@@ -1,6 +1,3 @@
-let ui;
-let dbg;
-
 async function init() {
   /*
 theme stuff
