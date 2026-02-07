@@ -15,6 +15,12 @@ i was looking at the source code of a venge.io cheat and i told myself "damn all
 - info things when hovering something with mouse
 - all of it is customizable
 
+---
+## tampermonkey example
+![example pic](https://github.com/4lpndev/4lpn-ui-lib/blob/main/pics/1.png?raw=true)
+
+---
+
 docs are [here](https://github.com/4lpndev/4lpn-ui-lib/blob/main/DOCS.md)
 
 ~~# feel free to join the [discord](https://google.com)!~~ discord is everything but ready, once ready i'll make it redirect to the discord instead of google.
