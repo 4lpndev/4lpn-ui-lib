@@ -10,7 +10,7 @@ refere to the theme structure in docs
   //let prevTab = document.createElement("a")
 
   //for debugging
-  const uiTheme = new UiLibTheme("https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/dev/test_jsonload.json");
+  const uiTheme = new UiLibTheme("https://raw.githubusercontent.com/4lpndev/4lpn-ui-lib/refs/heads/main/test_jsonload.json");
   const theme = await uiTheme.get_custom_theme();
 
   ui = new UiLib(theme);
