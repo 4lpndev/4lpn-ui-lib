@@ -6,7 +6,7 @@
       },
 
       "gui": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "left": "-3px",
@@ -20,7 +20,7 @@
       },
 
       "tabs": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "left": "-3px",
@@ -38,13 +38,13 @@
         "borderColor": "gray",
         "borderThickness": "3px",
         "borderRadius": "0px",
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white"
       },
 
       "buttons": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "borderColor": "white",
@@ -54,7 +54,7 @@
       },
 
       "input": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "borderColor": "white",
@@ -64,7 +64,7 @@
       },
 
       "dropdown": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "borderColor": "white",
@@ -74,7 +74,7 @@
       },
 
       "checkbox": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "borderColor": "white",
@@ -91,7 +91,7 @@
       },
 
       "textarea": {
-        "backgroundColor": "black",
+        "backgroundColor": "gray",
         "font": "monospace",
         "textColor": "white",
         "borderColor": "white",
