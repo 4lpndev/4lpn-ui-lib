@@ -79,7 +79,7 @@ const events = new UiLibEvents();
 class UiLibTheme {
   /**
    * used to load the theme
-   * no parameters for loading the class
+   * @param {string} url - only for loading the theme via url, obselete otherwise
    */
   constructor(url = "") {
     this._theme = {
@@ -704,3 +704,4 @@ class UiLibDebug {
     );
   }
 }
+
