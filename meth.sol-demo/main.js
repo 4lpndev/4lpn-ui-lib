@@ -1,6 +1,5 @@
 //classes initialization
 let uiTheme = new UiLibTheme()
-const dbg = new UiLibDebug()
 const ui = new UiLib()
 
 let prevTab = document.createElement("a")
@@ -18,7 +17,8 @@ uiTheme._theme.tabs.borderType = "none"
 uiTheme._theme.gui.borderType = "none"
 uiTheme._theme.tabs.backgroundColor = "#3f3f3c"
 uiTheme._theme.gui.backgroundColor = "#262625"
-ui._theme = uiTheme.get_theme()
+ui._theme = uiTheme.get_default_theme()
+const dbg = new UiLibDebug(ui._theme)
 const th = ui._theme
 
 //for debugging
