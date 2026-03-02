@@ -35,7 +35,7 @@ refere to the theme structure in docs
     dbg.error("nooooo it doesn't work :(")
 
     //creating the window
-    ui.create_window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
+    ui.window("<span style='color: red'>4</span>lpn's UI lib demo", ["fit-content","430px"])
 
     //for the tabs
     ui.create_tab_ctx(["0px", "-20px"]) //tab context
@@ -50,25 +50,25 @@ refere to the theme structure in docs
     //events and stuff
     tab1.addEventListener("click", () => {
         tab1.style.backgroundColor = th.tabs.selectedColor
-        const label = ui.create_label("this is tab 1", ["20px","50px"])
+        const label = ui.label("this is tab 1", ["20px","50px"])
         prevTab = tab1
     })
 
     tab2.addEventListener("click", () => {
         tab2.style.backgroundColor = th.tabs.selectedColor
-        const label = ui.create_label("this is tab 2", ["20px","50px"])
+        const label = ui.label("this is tab 2", ["20px","50px"])
         prevTab = tab2
     })
 
     tab3.addEventListener("click", () => {
         tab3.style.backgroundColor = th.tabs.selectedColor
-        const label = ui.create_label("this is tab 3", ["20px","50px"])
+        const label = ui.label("this is tab 3", ["20px","50px"])
         prevTab = tab3
     })
 
     tab4.addEventListener("click", () => {
         tab4.style.backgroundColor = th.tabs.selectedColor
-        const label = ui.create_label("this is tab 4", ["20px","50px"])
+        const label = ui.label("this is tab 4", ["20px","50px"])
         prevTab = tab4
     })
 })();
