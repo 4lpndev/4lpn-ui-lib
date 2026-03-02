@@ -43,6 +43,7 @@ function dragElement(elmnt) {
   }
 }
 
+//maybe removing, pointless.
 class UiLibEvents {
   constructor() {
     this.listeners = {};
@@ -76,7 +77,11 @@ class UiLibEvents {
 const events = new UiLibEvents();
 
 class UiLibTheme {
-  constructor(url = "default") {
+  /**
+   * used to load the theme
+   * no parameters for loading the class
+   */
+  constructor(url = "") {
     this._theme = {
       debug: {
         errorColor: "red",
@@ -177,25 +182,37 @@ class UiLibTheme {
         borderType: "double",
         borderThickness: "2px",
         borderRadius: "5px",
-      }
+      },
     };
-    this._theme_url = url
+    this._theme_url = url;
+  }
+  get_default_theme() {
+    /**
+     * simply loads the default theme, no arguments nessecary
+     * @returns {this._theme}
+     */
+    return this._theme;
   }
 
-    get_default_theme() {
-        return this._theme
-    }
-
-    async get_custom_theme() {
+  async get_custom_theme() {
+    /**
+     * loads theme via url
+     * @param {string} url - the url to load
+     * @returns {JSON} response - the theme in a json format
+     */
     const response = await fetch(this._theme_url);
     if (!response.ok) {
-        throw new Error("fetch response was not ok");
+      throw new Error("fetch response was not ok");
     }
     return await response.json();
-    }
+  }
 }
 
 class UiLib {
+  /**
+   * for all the UI stuff
+   * @param {JSON} theme - the theme loaded in UiLibTheme
+   */
   constructor(theme) {
     this._mainWindow = null;
     this._theme = theme;
@@ -208,6 +225,10 @@ class UiLib {
     this._guiHidden = false;
   }
 
+  /**
+   * 
+   * @param {string[]} position - can be any css values for x and y
+   */
   create_tab_ctx(position) {
     const tabappend = document.createElement("div");
     tabappend.style.width = "calc(100% - 77px)";
@@ -221,6 +242,10 @@ class UiLib {
   }
 
   append_tab_ctx() {
+    /**
+     * appends the tab ctx to the main window
+     * doesn't return anything
+     */
     this._mainWindow.appendChild(this._tabctx);
   }
 
@@ -244,6 +269,12 @@ class UiLib {
   }
 
   create_tab(tabname, dimentions) {
+    /**
+     * creates the tab and appends it in the tab ctx
+     * @param {string} tabname - the name of the tab
+     * @param {string[]} dimentions - the dimentions of the tab (any css values)
+     * @returns {HTMLElement} tab - the tab
+    */
     const tab = document.createElement("div");
     tab.innerText = tabname;
     tab.style.cursor = "pointer";
@@ -274,6 +305,12 @@ class UiLib {
   }
 
   window(title, dimentions) {
+    /**
+     * creates the main window
+     * @param {string} title - window title
+     * @param {string[]} dimentions - window dimentions (any css values)
+     * @returns {HTMLElement} this._mainWindow - the main window
+     */
     const winTitle = document.createElement("h4");
     winTitle.style.position = "relative";
     winTitle.style.color = this._theme.gui.textColor;
@@ -309,11 +346,19 @@ class UiLib {
   }
 
   update_window() {
+    /**
+     * refreshes the window, honestly forgot why i added this
+     */
     const th = this._theme;
     this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
   }
 
   colorpicker(position) {
+    /**
+     * creates a colorpicker element
+     * @param {string[]} position - the position of the colorpicker
+     * @returns {HTMLElement} cpicker - the colorpicker
+     */
     const cpicker = document.createElement("input");
     cpicker.type = "color";
     cpicker.style.position = "relative";
@@ -328,6 +373,13 @@ class UiLib {
   }
 
   button(text, dimentions, position) {
+    /**
+     * creates a button on the window
+     * @param {string} text - the text of the button
+     * @param {string[]} dimentions - the dimentions of the button (any css values)
+     * @param {string[]} position - the position of the button (any css values)
+     * @returns {HTMLElement} btn - the button
+     */
     const btn = document.createElement("button");
     btn.style.fontFamily = this._theme.buttons.font;
     btn.style.width = `${dimentions[0]}`;
@@ -348,7 +400,14 @@ class UiLib {
     return btn;
   }
 
-  slider(text, min, max, position) {
+  slider(min, max, position) {
+    /**
+     * creates a value slider on the window
+     * @param {number} min - the minimum value of the slider
+     * @param {number} max - the maximum value of the slider
+     * @param {string[]} position - the position of the slider (any css values)
+     * @returns {HTMLElement} slider - the slider
+    */
     const slider = document.createElement("input");
     slider.style.position = "relative";
     slider.type = "range";
@@ -380,6 +439,14 @@ class UiLib {
   }
 
   label(text, position, backgroundColorOn, isWaterMark) {
+    /**
+     * creates a text label on the window
+     * @param {string} text - the text of the label
+     * @param {string[]} position - the position of the label (any css values)
+     * @param {boolean} backgroundColorOn - if the background color should be on or not
+     * @param {boolean} isWaterMark - if the label is a watermark or not, if watermark, avoids being removed
+     * @returns {HTMLElement} lab - the label
+    */
     const lab = document.createElement("span");
     lab.style.position = "relative";
     lab.innerText = text;
@@ -404,6 +471,13 @@ class UiLib {
   }
 
   input(placeholder, dimentions, position) {
+    /**
+     * creates a text input on the window
+     * @param {string} placeholder - the placeholder of the input
+     * @param {string[]} dimentions - the dimentions of the input (any css values)
+     * @param {string[]} position - the position of the input (any css values)
+     * @returns {HTMLElement} inp - the input
+    */
     const inp = document.createElement("input");
     inp.placeholder = placeholder;
     inp.style.position = "relative";
@@ -422,6 +496,13 @@ class UiLib {
   }
 
   checkbox(text, position, boxdim) {
+    /**
+     * creates a checkbox on the window
+     * @param {string} text - the text of the checkbox
+     * @param {string[]} position - the position of the checkbox (any css values)
+     * @param {string[]} boxdim - the dimentions of the checkbox (any css values)
+     * @returns {HTMLElement} checkbox - the checkbox
+     */
     const checkbox = document.createElement("div");
     const label = document.createElement("span");
     checkbox.style.width = boxdim;
@@ -441,7 +522,7 @@ class UiLib {
     label.style.color = this._theme.gui.textColor;
     label.innerText = text;
 
-    let toggled = false;
+    // let toggled = false; just realized this is pointless lmaoooo
 
     this._elements.push(checkbox);
     this._elements.push(label);
@@ -453,6 +534,13 @@ class UiLib {
   }
 
   dropdown(options, dimentions, position) {
+    /**
+     * creates a dropdown menu on the window
+     * @param {string[]} options - the options of the dropdown menu
+     * @param {string[]} dimentions - the dimentions of the dropdown menu (any css values)
+     * @param {string[]} position - the position of the dropdown menu (any css values)
+     * @returns {HTMLElement} sel - the dropdown menu
+     */
     const sel = document.createElement("select");
     sel.style.position = "relative";
     sel.style.backgroundColor = this._theme.dropdown.backgroundColor;
@@ -478,6 +566,12 @@ class UiLib {
   }
 
   textarea(dimentions, position) {
+    /**
+     * creates a textarea on the window
+     * @param {string[]} dimentions - the dimentions of the textarea (any css values)
+     * @param {string[]} position - the position of the textarea (any css values)
+     * @returns {HTMLElement} textarea - the textarea
+     */
     const textarea = document.createElement("textarea");
     textarea.classList.add("textarea");
     textarea.style.position = "relative";
@@ -499,19 +593,33 @@ class UiLib {
   }
 
   append_window() {
+    /**
+     * simply appends the window on the page, call after adding all the components on the window
+     */
     document.body.appendChild(this._mainWindow);
     dragElement(this._mainWindow);
   }
 
   delete_element(elem) {
+    /**
+     * removes an element from the window
+     */
     elem.remove();
   }
 
   destroy_window() {
+    /**
+     * destroys/removes the window, can be useful for a "panic" mode
+     */
     this._mainWindow.remove();
   }
 
   infolabel(elem, infotext) {
+    /**
+     * creates a label when hovering over with mouse and goes away when no longer hovering
+     * @param {HTMLElement} elem - the element to add the info text to
+     * @param {string} infotext - the description
+    */
     let mx = 0;
     let my = 0;
 
@@ -553,6 +661,10 @@ class UiLib {
 }
 
 class UiLibDebug {
+  /**
+   * for logging purposes, every functions of this class are pretty self explanatory and only require one param which is a string
+   * @param {JSON} theme
+   */
   constructor(theme) {
     this._theme = theme;
   }
