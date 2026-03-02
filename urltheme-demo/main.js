@@ -42,22 +42,18 @@ refere to the theme structure in docs
   tab1.addEventListener("click", () => {
     const label = ui.label("this is tab 1", ["20px", "50px"]);
     ui.infolabel(label, "woaaaa cool label!!!");
-    prevTab = tab1;
   });
 
   tab2.addEventListener("click", () => {
     const label = ui.label("this is tab 2", ["20px", "50px"]);
-    prevTab = tab2;
   });
 
   tab3.addEventListener("click", () => {
     const label = ui.label("this is tab 3", ["20px", "50px"]);
-    prevTab = tab3;
   });
 
   tab4.addEventListener("click", () => {
     const label = ui.label("this is tab 4", ["20px", "50px"]);
-    prevTab = tab4;
   });
 }
 
