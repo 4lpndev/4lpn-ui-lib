@@ -175,9 +175,9 @@ class UiLibTheme {
       },
 
       textarea: {
-        backgroundColor: "white",
+        backgroundColor: "black",
         font: "monospace",
-        textColor: "black",
+        textColor: "white",
         borderColor: "white",
         borderType: "double",
         borderThickness: "2px",
@@ -361,7 +361,7 @@ class UiLib {
      */
     const cpicker = document.createElement("input");
     cpicker.type = "color";
-    cpicker.style.position = "relative";
+    cpicker.style.position = "absolute";
     cpicker.style.left = position[0];
     cpicker.style.top = position[1];
 
@@ -419,11 +419,12 @@ class UiLib {
     slider.style.top = `${position[1]}`;
 
     const val = document.createElement("span");
+    let lrunit = position[0].replace(/[0-9.-]/g, "");
     val.style.position = "relative";
     val.style.color = this._theme.gui.textColor;
     val.style.fontFamily = this._theme.gui.font;
     val.innerText = slider.value;
-    val.style.left = `${position[0] - 120}`;
+    val.style.left = `${parseInt(position[0]) - 10}${lrunit}`;
     val.style.top = `${position[1]}`;
 
     slider.addEventListener("change", () => {
@@ -522,7 +523,17 @@ class UiLib {
     label.style.color = this._theme.gui.textColor;
     label.innerText = text;
 
-    // let toggled = false; just realized this is pointless lmaoooo
+    let toggled = false;
+
+    checkbox.addEventListener("click", () => {
+      if (toggled) {
+        checkbox.style.backgroundColor = this._theme.checkbox.backgroundColor;
+        toggled = false;
+      } else {
+        checkbox.style.backgroundColor = this._theme.checkbox.toggledColor;
+        toggled = true;
+      }
+    });
 
     this._elements.push(checkbox);
     this._elements.push(label);
