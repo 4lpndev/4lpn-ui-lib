@@ -1,8 +1,8 @@
 # 4lpn-ui-lib
-simple usage ui library made in js that can be used for practically anything
+simple usage ui library made in js that can be used for cheat making
 ---
 # why make this project tho?
-i was in professional school and we had to do an assignement where we had to do a small web UI and i realized that it's a shit ton of lines of code just for the UI and i told myself "why not make it easier?" so i made this :D
+i was looking at the source code of a venge.io cheat and i told myself "damn all these lines just for the UI?" and i tought to myself "what if there was a way to make it easier to make the UIs?" then i started working on this in dec. 2024.
 ---
 # things in it:
 
@@ -15,8 +15,16 @@ i was in professional school and we had to do an assignement where we had to do 
 - info things when hovering something with mouse
 - all of it is customizable
 
+---
+## tampermonkey example
+![example pic](https://github.com/4lpndev/4lpn-ui-lib/blob/main/pics/1.png?raw=true)
+
+---
+
 docs are [here](https://github.com/4lpndev/4lpn-ui-lib/blob/main/DOCS.md)
 
 ~~# feel free to join the [discord](https://google.com)!~~ discord is everything but ready, once ready i'll make it redirect to the discord instead of google.
 
 ###### note: project is far from finished so there might be a lot of bugs
+
+# more important note so bigger: latest releases (tho maybe very buggy) are in the dev branch
