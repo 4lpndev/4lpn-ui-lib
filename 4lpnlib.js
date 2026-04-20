@@ -349,7 +349,6 @@ class UiLib {
     /**
      * refreshes the window, honestly forgot why i added this
      */
-    const th = this._theme;
     this._mainWindow.style.backgroundColor = th._theme.gui.backgroundColor;
   }
 
@@ -446,29 +445,29 @@ class UiLib {
      * @param {string[]} position - the position of the label (any css values)
      * @param {boolean} backgroundColorOn - if the background color should be on or not
      * @param {boolean} isWaterMark - if the label is a watermark or not, if watermark, avoids being removed
-     * @returns {HTMLElement} lab - the label
+     * @returns {HTMLElement} label - the label
     */
-    const lab = document.createElement("span");
-    lab.style.position = "relative";
-    lab.innerText = text;
+    const label = document.createElement("span");
+    label.style.position = "relative";
+    label.innerText = text;
     if (backgroundColorOn) {
-      lab.backgroundColor = this._theme.label.backgroundColor;
+      label.backgroundColor = this._theme.label.backgroundColor;
     } else {
-      lab.backgroundColor = "none";
+      label.backgroundColor = "none";
     }
-    lab.style.color = this._theme.label.textColor;
-    lab.style.fontFamily = this._theme.label.font;
-    lab.style.left = `${position[0]}`;
-    lab.style.top = `${position[1]}`;
+    label.style.color = this._theme.label.textColor;
+    label.style.fontFamily = this._theme.label.font;
+    label.style.left = `${position[0]}`;
+    label.style.top = `${position[1]}`;
 
     if (isWaterMark) {
     } else {
-      this._elements.push(lab);
+      this._elements.push(label);
     }
 
-    this._mainWindow.appendChild(lab);
+    this._mainWindow.appendChild(label);
 
-    return lab;
+    return label;
   }
 
   input(placeholder, dimentions, position) {
@@ -479,21 +478,21 @@ class UiLib {
      * @param {string[]} position - the position of the input (any css values)
      * @returns {HTMLElement} inp - the input
     */
-    const inp = document.createElement("input");
-    inp.placeholder = placeholder;
-    inp.style.position = "relative";
-    inp.style.left = `${position[0]}`;
-    inp.style.top = `${position[1]}`;
-    inp.style.width = `${dimentions[0]}`;
-    inp.style.height = `${dimentions[1]}`;
-    inp.style.border = `${this._theme.input.borderThickness} ${this._theme.input.borderType} ${this._theme.input.borderColor}`;
-    inp.style.backgroundColor = this._theme.gui.backgroundColor;
-    inp.style.color = this._theme.gui.textColor;
-    this._mainWindow.appendChild(inp);
+    const input = document.createElement("input");
+    input.placeholder = placeholder;
+    input.style.position = "relative";
+    input.style.left = `${position[0]}`;
+    input.style.top = `${position[1]}`;
+    input.style.width = `${dimentions[0]}`;
+    input.style.height = `${dimentions[1]}`;
+    input.style.border = `${this._theme.input.borderThickness} ${this._theme.input.borderType} ${this._theme.input.borderColor}`;
+    input.style.backgroundColor = this._theme.gui.backgroundColor;
+    input.style.color = this._theme.gui.textColor;
+    this._mainWindow.appendChild(input);
 
-    this._elements.push(inp);
+    this._elements.push(input);
 
-    return inp;
+    return input;
   }
 
   checkbox(text, position, boxdim) {

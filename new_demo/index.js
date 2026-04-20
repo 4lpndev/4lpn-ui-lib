@@ -34,7 +34,7 @@ ui.append_window() //render window to main screen
 
 //events and stuff
 tab1.addEventListener("click", () => {
-    const label = ui.label("this is tab 1", ["20px","50px"])
+    const label = ui.label("hover me!", ["20px","50px"])
     const label_smoothness = ui.label("slider", ["-50px","100px"])
     const slider = ui.slider(0,10,["-25px","100px"])
     const checkbox = ui.checkbox("checkbox", ["10px","200px"], "20px")
